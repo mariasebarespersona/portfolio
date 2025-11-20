@@ -1,0 +1,58 @@
+MARÍA SEBARES
+Data Scientist/ AI Engineer
+Spanish and British • London, United Kingdom
+mariasebares9@gmail.com • 07561076885
+
+PROFESSIONAL SUMMARY
+AI Engineer and Data Scientist with over 3 years of experience specialising in cutting-edge Agentic AI systems and 'full-stack' AI/ML system workflows, with end-to-end expertise in building, deploying, and scaling intelligent Agentic AI. Adept at utilising cutting-edge frameworks and cloud platforms like GCP and AWS, demonstrating expertise in developing scalable APIs and integrating advanced conversational AI features. Proven experience in engaging with clients to understand their unique business needs, and in-turn providing appropriate AI-enabled solutions. Committed to advancing the field of AI with a strong foundation in neuroscience and a focus on continuous professional growth.
+
+EMPLOYMENT HISTORY
+
+Consultant Data Scientist/ AI Engineer | IBM
+London | Nov 2022 – Present
+• Developed an Agentic Gen-AI Virtual Assistant, significantly improving customer spending insights and driving substantial revenue growth for the company.
+• Led the development of key features related to conversational logic including: Multi-turn, context-aware, input & output guardrails, tools (information extraction, authentication, etc) - utilising cutting-edge frameworks such as AI frameworks DSPy, LangGraph and OpenAI Agents SDK for agentic-LLM work, a mix of fine-tuned small-models/classifiers, and embeddings models.
+• Developed and deployed scalable, production-ready APIs to facilitate real time interaction with systems, ensuring smooth integration – Utilising technologies such as FastAPI and Postman.
+• Have taken an active role with client communication, having been on this project since early POC stages, consistently driving discussions with both technical and non-technical stakeholders during regular meetings and fortnightly playbacks – securing total contract value of £5M+ over 5 quarters.
+• Analysed transaction datasets to develop predictive models with XGBoost, SVM, and random forests, improving financial forecasting accuracy.
+• Managed version control via GitHub, actively reviewing and ensuring team-wide adherence to best practices.
+
+Intern | Centre for Finance, Technology and Entrepreneurship (CFTE)
+London | Aug 2021
+• Conducted research on emerging FinTech trends, particularly blockchain and AI in finance.
+• Assisted in preparing reports and presentations analyzing their impact on traditional finance.
+• Supported the development of educational content, including online courses and webinars on financial innovation.
+• This experience enhanced my research and content development skills while deepening my knowledge of FinTech.
+
+SIDE PROJECTS
+
+Real Estate AI Agent (Tumai) | Agentic Document Assistant
+Jan 2024 – Present
+• Designed and developed an AI-powered assistant to help real estate professionals manage documents via a natural language chat interface.
+• The agent enables users to upload, delete, retrieve, and send documents by email, integrating backend actions with LLM-driven interaction.
+• Built with Python, OpenAI Agents SDK, PostgreSQL and React, the app leverages agentic workflows and embeddings for intelligent file handling.
+• Demonstrates ability to translate user intent into dynamic task execution, blending LLMs with structured system tools.
+
+EDUCATION
+
+University College London (UCL)
+MSci Neuroscience (Upper 2.1) | Sep 2018 - Jun 2022
+• Thesis: "The use of optogenetics to understand motor behaviour in mice."
+• Key modules: Neural Computation and Molecular Biology for Neuroscientists.
+
+Imperial College London
+Mathematics for Machine Learning | Jun 2021 - Aug 2021
+
+SKILLS
+• Machine Learning, Python, SQL, JavaScript, Go, React, Node.js
+• Agentic Frameworks: LangGraph, DSPy, OpenAI
+• Cloud/Infra: AWS, GCP, PostgreSQL, Docker, Git
+• Other: Prompt Engineering, Team Leadership, Communication, IoT, N8N
+
+LANGUAGES
+• English (Native), Spanish (Native), French (Highly proficient)
+
+CERTIFICATIONS AND AWARDS
+• AWS Cloud Practitioner, Amazon Web Services
+• Datathon Winner 2024, IBM
+• Machine Learning Award, Lloyds
