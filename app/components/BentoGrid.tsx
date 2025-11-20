@@ -168,10 +168,34 @@ function LinkedInCard() {
     );
 }
 
-function ProjectCard({ title, desc, color, tags, wide = false, link = "#", badge, icon }: { title: string, desc: string, color: string, tags: string[], wide?: boolean, link?: string, badge?: string, icon?: React.ReactNode }) {
+type ProjectCardProps = {
+    title: string;
+    desc: string;
+    color: string;
+    tags: string[];
+    wide?: boolean;
+    link?: string;
+    badge?: string;
+    icon?: React.ReactNode;
+    secondaryLabel?: string;
+    secondaryLink?: string;
+};
+
+function ProjectCard({
+    title,
+    desc,
+    color,
+    tags,
+    wide = false,
+    link = "#",
+    badge,
+    icon,
+    secondaryLabel,
+    secondaryLink,
+}: ProjectCardProps) {
     return (
-        <a href={link} target="_blank" className={`${wide ? 'col-span-2 md:col-span-2' : 'col-span-2 md:col-span-1'}`}>
-            <Card className="p-8 group hover:bg-neutral-900 transition-colors cursor-pointer flex flex-col justify-between min-h-[240px] h-full relative overflow-hidden">
+        <div className={`${wide ? 'col-span-2 md:col-span-2' : 'col-span-2 md:col-span-1'}`}>
+            <Card className="p-8 group hover:bg-neutral-900 transition-colors cursor-default flex flex-col justify-between min-h-[240px] h-full relative overflow-hidden">
                 {badge && (
                     <div className="absolute top-4 right-4 px-2 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                         <Trophy size={10} /> {badge}
@@ -182,11 +206,6 @@ function ProjectCard({ title, desc, color, tags, wide = false, link = "#", badge
                     <div className={`w-12 h-12 rounded-2xl ${color} flex items-center justify-center text-2xl shadow-lg ring-4 ring-black`}>
                         {icon || "🚀"}
                     </div>
-                    {!badge && (
-                        <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-400 group-hover:bg-white/10 transition-colors flex items-center gap-1">
-                            View <ArrowUpRight size={12} />
-                        </div>
-                    )}
                 </div>
                 
                 <div>
@@ -200,9 +219,33 @@ function ProjectCard({ title, desc, color, tags, wide = false, link = "#", badge
                             </span>
                         ))}
                     </div>
+                    {(link || (secondaryLink && secondaryLabel)) && (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                            {link && (
+                                <a
+                                    href={link}
+                                    target="_blank"
+                                    className="px-3 py-1 rounded-full bg-white text-black text-[11px] font-medium hover:bg-neutral-200 transition-colors flex items-center gap-1"
+                                >
+                                    <ArrowUpRight size={12} />
+                                    <span>Open app</span>
+                                </a>
+                            )}
+                            {secondaryLink && secondaryLabel && (
+                            <a
+                                href={secondaryLink}
+                                target="_blank"
+                                className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-200 hover:bg-white/10 transition-colors flex items-center gap-1"
+                            >
+                                <Github size={12} />
+                                <span>{secondaryLabel}</span>
+                            </a>
+                            )}
+                        </div>
+                    )}
                 </div>
             </Card>
-        </a>
+        </div>
     );
 }
 
@@ -284,7 +327,9 @@ const BentoGrid = () => {
                 color="bg-green-600"
                 tags={["Python", "AI Agents", "Real Estate", "Startup"]}
                 wide={true}
-                link="https://github.com/mariasebarespersona/tumai"
+                link="https://tumai-kappa.vercel.app"
+                secondaryLabel="GitHub"
+                secondaryLink="https://github.com/mariasebarespersona/tumai"
             />
 
             {/* ROW 3: Secondary Projects + Stack + Contact */}
