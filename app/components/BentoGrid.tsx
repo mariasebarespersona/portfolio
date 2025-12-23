@@ -245,6 +245,7 @@ function ProjectCard({
                             )}
                         </div>
                     )}
+                </div>
         </Card>
     );
 }
