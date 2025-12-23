@@ -94,12 +94,12 @@ function MemojiCard() {
             >
             <div className="absolute inset-0 bg-gradient-to-b from-neutral-800/20 to-black z-0" />
             
-            <div className="relative w-[90%] h-[90%] pointer-events-none">
+            <div className="relative w-full h-full pointer-events-none flex items-center justify-center pb-12">
                 <video 
                     ref={videoRef}
                     src="/avatar.mov" 
                     muted playsInline preload="auto"
-                    className="w-full h-full object-cover transform scale-125 translate-y-4 drop-shadow-2xl"
+                    className="max-h-full max-w-full object-contain drop-shadow-2xl"
                     onLoadedMetadata={(e) => e.currentTarget.pause()}
                 />
             </div>
