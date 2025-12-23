@@ -31,7 +31,7 @@ const itemVariants: Variants = {
 
 // --- COMPONENTS ---
 
-function Card({ children, className = "", spotlight = true, noPadding = false }: { children: React.ReactNode; className?: string; spotlight?: boolean; noPadding?: boolean }) {
+function Card({ children, className = "", spotlight = true, noPadding = false, onClick }: { children: React.ReactNode; className?: string; spotlight?: boolean; noPadding?: boolean; onClick?: () => void }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -46,6 +46,7 @@ function Card({ children, className = "", spotlight = true, noPadding = false }:
       variants={itemVariants}
       className={`relative border border-white/10 bg-neutral-900/50 overflow-hidden rounded-3xl backdrop-blur-sm ${className}`}
       onMouseMove={handleMouseMove}
+      onClick={onClick}
     >
       {spotlight && (
         <motion.div
@@ -140,9 +141,9 @@ function IntroCard() {
     );
 }
 
-function ResumeCard() {
+function ResumeCard({ className = "" }: { className?: string }) {
     return (
-        <a href="/cv.txt" target="_blank" className="col-span-1 row-span-1">
+        <a href="/cv.txt" target="_blank" className={`block ${className}`}>
             <Card className="h-full flex flex-col justify-center items-center bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer">
                 <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                     <FileText className="text-white w-6 h-6" />
@@ -154,9 +155,9 @@ function ResumeCard() {
     );
 }
 
-function LinkedInCard() {
+function LinkedInCard({ className = "" }: { className?: string }) {
     return (
-        <a href="https://www.linkedin.com/in/maria-sebares9" target="_blank" className="col-span-1 row-span-1">
+        <a href="https://www.linkedin.com/in/maria-sebares9" target="_blank" className={`block ${className}`}>
             <Card className="h-full flex flex-col justify-center items-center bg-[#0077b5]/10 hover:bg-[#0077b5]/20 transition-colors group cursor-pointer border-[#0077b5]/20">
                 <div className="w-12 h-12 rounded-full bg-[#0077b5] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg">
                     <Linkedin className="text-white w-6 h-6" />
@@ -275,15 +276,34 @@ function StackCard() {
 }
 
 function ContactCard() {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText("mariasebares9@gmail.com");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
     return (
-        <Card className="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-600 to-blue-500 border-none !p-0 overflow-hidden group cursor-pointer relative">
+        <Card 
+            onClick={handleCopy}
+            className="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-600 to-blue-500 border-none !p-0 overflow-hidden group cursor-pointer relative"
+        >
             <div className="h-full w-full p-8 flex items-center justify-between relative z-10">
                 <div>
-                    <h3 className="text-3xl font-bold text-white mb-1">Let's work together</h3>
-                    <p className="text-blue-100 text-sm">I'm currently open to new opportunities.</p>
+                    <h3 className="text-3xl font-bold text-white mb-1">
+                        {copied ? "Email Copied!" : "Let's work together"}
+                    </h3>
+                    <p className="text-blue-100 text-sm">
+                        {copied ? "mariasebares9@gmail.com" : "I'm currently open to new opportunities."}
+                    </p>
                 </div>
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl">
-                    <Mail className="text-blue-600 w-6 h-6" />
+                    {copied ? (
+                         <div className="text-blue-600 font-bold text-xl">✓</div>
+                    ) : (
+                        <Mail className="text-blue-600 w-6 h-6" />
+                    )}
                 </div>
             </div>
             {/* Animated Background Gradient */}
@@ -302,25 +322,26 @@ const BentoGrid = () => {
         <div className="fixed inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
         
         <motion.div 
-            className="max-w-5xl w-full grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]"
+            className="max-w-5xl w-full grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[minmax(140px,auto)]"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
         >
             
-            {/* ROW 1: Avatar (Identity) + Intro (Value Prop) + Resume (Quick Action) */}
+            {/* ROW 1: Avatar (Identity) + Intro (Value Prop) + Socials Stack */}
             <MemojiCard /> {/* 1x2 tall */}
             
             <IntroCard /> {/* 2x1 wide */}
             
-            <ResumeCard /> {/* 1x1 */}
+            {/* Stacked Resume & LinkedIn */}
+            <div className="col-span-1 row-span-1 flex flex-col gap-4">
+                <ResumeCard className="flex-1" />
+                <LinkedInCard className="flex-1" />
+            </div>
 
-            {/* ROW 2: LinkedIn + Projects */}
+            {/* ROW 2: Tumai + RoomieScore */}
             {/* Memoji is occupying the left slot still */}
             
-            <LinkedInCard /> {/* 1x1 under Resume */}
-
-            {/* Priority Project (Wide) */}
             <ProjectCard 
                 title="Tumai" 
                 desc="AI-powered real estate investment platform for rural properties. Features automated financial modeling, document analysis, and voice interaction." 
@@ -331,8 +352,6 @@ const BentoGrid = () => {
                 secondaryLabel="GitHub"
                 secondaryLink="https://github.com/mariasebarespersona/tumai"
             />
-
-            {/* ROW 3: Secondary Projects + Stack + Contact */}
             
             <ProjectCard 
                 title="RoomieScore" 
@@ -342,6 +361,8 @@ const BentoGrid = () => {
                 badge="1st Place"
                 link="https://roomiescore.vercel.app/dashboard"
             />
+
+            {/* ROW 3: Neuro Ad + Stack + Contact */}
             
             <ProjectCard 
                 title="Neuro Ad Analyzer" 
@@ -352,7 +373,6 @@ const BentoGrid = () => {
                 icon={<Brain size={24} className="text-white" />}
             />
 
-            {/* ROW 4: Stack + Contact (Now Stack is row 4 since Neuro Ad took row 3 spot) */}
             <StackCard />
             <ContactCard /> {/* 2x1 Wide */}
 
