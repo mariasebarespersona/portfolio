@@ -251,12 +251,12 @@ function ProjectCard({
 }
 
 function StackCard() {
-    // Updated stack based on your projects (Tumai: Python/LangGraph, RoomieScore: React/Vercel, Neuro Ad: AI/Analytics)
+    // Updated stack based on your profile (Agentic AI Engineer)
     const stack = [
-        { name: "Python (AI)", icon: <Code size={14} /> },
-        { name: "Agentic AI", icon: <Brain size={14} /> },
-        { name: "AWS / GCP", icon: <Zap size={14} /> },
-        { name: "React", icon: <Code size={14} /> },
+        { name: "LangGraph & DSPy", icon: <Brain size={14} /> },
+        { name: "Python & FastAPI", icon: <Code size={14} /> },
+        { name: "RAG & Vector DBs", icon: <Zap size={14} /> },
+        { name: "React & Next.js", icon: <Code size={14} /> },
     ];
     
     return (
