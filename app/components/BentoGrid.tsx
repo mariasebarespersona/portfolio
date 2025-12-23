@@ -251,20 +251,21 @@ function ProjectCard({
 }
 
 function StackCard() {
-    // Updated stack based on your profile (Agentic AI Engineer)
+    // Stack updated for High-Ticket Client Attraction (End-to-End + Cloud)
     const stack = [
-        { name: "LangGraph & DSPy", icon: <Brain size={14} /> },
-        { name: "Python & FastAPI", icon: <Code size={14} /> },
+        { name: "Agentic AI (LangGraph/DSPy)", icon: <Brain size={14} /> },
         { name: "RAG & Vector DBs", icon: <Zap size={14} /> },
+        { name: "AWS & Cloud Architecture", icon: <Zap size={14} /> },
+        { name: "Python & FastAPI", icon: <Code size={14} /> },
         { name: "React & Next.js", icon: <Code size={14} /> },
     ];
     
     return (
         <Card className="h-full p-5 flex flex-col justify-between">
             <h3 className="text-[10px] text-neutral-500 uppercase tracking-wider font-bold mb-2">Tech Stack</h3>
-            <div className="flex flex-col gap-1.5 flex-1 justify-center">
+            <div className="flex flex-col gap-1 flex-1 justify-center">
                 {stack.map((tech, i) => (
-                    <div key={i} className="flex items-center justify-between text-xs text-neutral-300 border-b border-white/5 pb-1 last:border-0 last:pb-0">
+                    <div key={i} className="flex items-center justify-between text-[11px] text-neutral-300 border-b border-white/5 pb-1 last:border-0 last:pb-0">
                         <span>{tech.name}</span>
                         <span className="text-neutral-600">{tech.icon}</span>
                     </div>
