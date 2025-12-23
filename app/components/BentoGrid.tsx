@@ -84,13 +84,14 @@ function MemojiCard() {
     }
   };
 
-  return (
-    <Card className="col-span-2 md:col-span-1 row-span-2 aspect-square group relative bg-black" noPadding>
-       <div 
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        className="absolute inset-0 flex items-center justify-center cursor-crosshair"
-       >
+    return (
+        <div className="col-span-1 row-span-2 h-full">
+            <Card className="h-full aspect-auto group relative bg-black" noPadding>
+            <div 
+                ref={containerRef}
+                onMouseMove={handleMouseMove}
+                className="absolute inset-0 flex items-center justify-center cursor-crosshair"
+            >
             <div className="absolute inset-0 bg-gradient-to-b from-neutral-800/20 to-black z-0" />
             
             <div className="relative w-[90%] h-[90%] pointer-events-none">
@@ -111,14 +112,15 @@ function MemojiCard() {
                     </span>
                 </div>
             </div>
-       </div>
-    </Card>
-  );
+            </div>
+            </Card>
+        </div>
+    );
 }
 
 function IntroCard() {
     return (
-        <Card className="col-span-2 md:col-span-2 row-span-1 flex flex-col justify-center p-8 bg-neutral-900/40">
+        <Card className="h-full flex flex-col justify-center p-6 bg-neutral-900/40">
             <div className="flex items-center gap-2 mb-4">
                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                  <span className="text-xs font-medium text-green-500 uppercase tracking-wider">Available for work</span>
@@ -195,8 +197,7 @@ function ProjectCard({
     secondaryLink,
 }: ProjectCardProps) {
     return (
-        <div className={`${wide ? 'col-span-2 md:col-span-2' : 'col-span-2 md:col-span-1'}`}>
-            <Card className="p-8 group hover:bg-neutral-900 transition-colors cursor-default flex flex-col justify-between min-h-[240px] h-full relative overflow-hidden">
+        <Card className="p-5 group hover:bg-neutral-900 transition-colors cursor-default flex flex-col justify-between h-full relative overflow-hidden">
                 {badge && (
                     <div className="absolute top-4 right-4 px-2 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                         <Trophy size={10} /> {badge}
@@ -244,9 +245,7 @@ function ProjectCard({
                             )}
                         </div>
                     )}
-                </div>
-            </Card>
-        </div>
+        </Card>
     );
 }
 
@@ -256,16 +255,15 @@ function StackCard() {
         { name: "Python (AI)", icon: <Code size={14} /> },
         { name: "Agentic AI", icon: <Brain size={14} /> },
         { name: "AWS / GCP", icon: <Zap size={14} /> },
-        { name: "React / Next.js", icon: <Code size={14} /> },
-        { name: "PostgreSQL", icon: <Zap size={14} /> },
+        { name: "React", icon: <Code size={14} /> },
     ];
     
     return (
-        <Card className="col-span-1 row-span-1 p-6">
-            <h3 className="text-xs text-neutral-500 uppercase tracking-wider font-bold mb-4">Tech Stack</h3>
-            <div className="flex flex-col gap-2">
+        <Card className="h-full p-5 flex flex-col justify-between">
+            <h3 className="text-[10px] text-neutral-500 uppercase tracking-wider font-bold mb-2">Tech Stack</h3>
+            <div className="flex flex-col gap-1.5 flex-1 justify-center">
                 {stack.map((tech, i) => (
-                    <div key={i} className="flex items-center justify-between text-sm text-neutral-300 border-b border-white/5 pb-2 last:border-0 last:pb-0">
+                    <div key={i} className="flex items-center justify-between text-xs text-neutral-300 border-b border-white/5 pb-1 last:border-0 last:pb-0">
                         <span>{tech.name}</span>
                         <span className="text-neutral-600">{tech.icon}</span>
                     </div>
@@ -316,71 +314,86 @@ function ContactCard() {
 
 const BentoGrid = () => {
   return (
-    <div className="min-h-screen bg-neutral-950 text-white p-4 md:p-8 flex flex-col items-center justify-center relative">
+    <div className="h-screen w-screen bg-neutral-950 text-white p-4 flex items-center justify-center relative overflow-hidden">
         
         {/* Background Noise */}
         <div className="fixed inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
         
         <motion.div 
-            className="max-w-5xl w-full grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[minmax(140px,auto)]"
+            className="max-w-6xl w-full h-full max-h-[90vh] grid grid-cols-2 md:grid-cols-4 grid-rows-3 gap-3"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
         >
             
-            {/* ROW 1: Avatar (Identity) + Intro (Value Prop) + Socials Stack */}
-            <MemojiCard /> {/* 1x2 tall */}
+            {/* ROW 1 */}
+            {/* Memoji - spans 2 rows vertically */}
+            <div className="col-span-1 row-span-2">
+                 <MemojiCard /> 
+            </div>
             
-            <IntroCard /> {/* 2x1 wide */}
+            {/* Intro - spans 2 cols, 1 row */}
+            <div className="col-span-2 row-span-1">
+                <IntroCard />
+            </div>
             
-            {/* Stacked Resume & LinkedIn */}
-            <div className="col-span-1 row-span-1 flex flex-col gap-4">
+            {/* Stacked Resume & LinkedIn - spans 1 col, 1 row */}
+            <div className="col-span-1 row-span-1 flex flex-col gap-3">
                 <ResumeCard className="flex-1" />
                 <LinkedInCard className="flex-1" />
             </div>
 
-            {/* ROW 2: Tumai + RoomieScore */}
-            {/* Memoji is occupying the left slot still */}
+            {/* ROW 2 */}
+            {/* Tumai Project - spans 2 cols, 1 row */}
+             <div className="col-span-2 row-span-1">
+                <ProjectCard 
+                    title="Tumai" 
+                    desc="AI-powered real estate investment platform." 
+                    color="bg-green-600"
+                    tags={["Python", "AI Agents", "Real Estate"]}
+                    wide={true}
+                    link="https://tumai-kappa.vercel.app"
+                    secondaryLabel="GitHub"
+                    secondaryLink="https://github.com/mariasebarespersona/tumai"
+                />
+            </div>
             
-            <ProjectCard 
-                title="Tumai" 
-                desc="AI-powered real estate investment platform for rural properties. Features automated financial modeling, document analysis, and voice interaction." 
-                color="bg-green-600"
-                tags={["Python", "AI Agents", "Real Estate", "Startup"]}
-                wide={true}
-                link="https://tumai-kappa.vercel.app"
-                secondaryLabel="GitHub"
-                secondaryLink="https://github.com/mariasebarespersona/tumai"
-            />
-            
-            <ProjectCard 
-                title="RoomieScore" 
-                desc="Cursor Hackathon Winner (Madrid). A platform to rate and find roommates." 
-                color="bg-purple-500"
-                tags={["Hackathon Winner", "React", "Vercel"]}
-                badge="1st Place"
-                link="https://roomiescore.vercel.app/dashboard"
-            />
+            {/* RoomieScore - spans 1 col, 1 row */}
+            <div className="col-span-1 row-span-1">
+                <ProjectCard 
+                    title="RoomieScore" 
+                    desc="Cursor Hackathon Winner." 
+                    color="bg-purple-500"
+                    tags={["React", "Vercel"]}
+                    badge="1st Place"
+                    link="https://roomiescore.vercel.app/dashboard"
+                />
+            </div>
 
-            {/* ROW 3: Neuro Ad + Stack + Contact */}
-            
-            <ProjectCard 
-                title="Neuro Ad Analyzer" 
-                desc="AI-driven analysis for marketing campaigns to optimize engagement." 
-                color="bg-rose-500"
-                tags={["AI", "Analytics", "Marketing"]}
-                link="https://neuro-ad-analyzer-5qlbpk2wg-mariasebarespersonas-projects.vercel.app"
-                icon={<Brain size={24} className="text-white" />}
-            />
+            {/* ROW 3 */}
+            {/* Neuro Ad - spans 1 col, 1 row */}
+            <div className="col-span-1 row-span-1">
+                <ProjectCard 
+                    title="Neuro Ad Analyzer" 
+                    desc="AI-driven marketing analysis." 
+                    color="bg-rose-500"
+                    tags={["AI", "Analytics"]}
+                    link="https://neuro-ad-analyzer-5qlbpk2wg-mariasebarespersonas-projects.vercel.app"
+                    icon={<Brain size={24} className="text-white" />}
+                />
+            </div>
 
-            <StackCard />
-            <ContactCard /> {/* 2x1 Wide */}
+            {/* Stack - spans 1 col, 1 row */}
+            <div className="col-span-1 row-span-1">
+                 <StackCard />
+            </div>
+
+             {/* Contact - spans 2 cols, 1 row */}
+            <div className="col-span-2 row-span-1">
+                 <ContactCard /> 
+            </div>
 
         </motion.div>
-        
-        <p className="mt-12 text-neutral-600 text-sm mb-20">
-            © 2025 Maria. Made with ❤️ in Madrid.
-        </p>
     </div>
   );
 };
