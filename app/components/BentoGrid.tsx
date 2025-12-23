@@ -145,7 +145,7 @@ function IntroCard() {
 
 function ResumeCard({ className = "" }: { className?: string }) {
     return (
-        <a href="/cv.txt" target="_blank" className={`block ${className}`}>
+        <a href="/resume" className={`block ${className}`}>
             <Card className="h-full flex flex-col justify-center items-center bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer">
                 <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                     <FileText className="text-white w-6 h-6" />
