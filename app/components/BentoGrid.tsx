@@ -380,7 +380,7 @@ const BentoGrid = () => {
                     desc="AI-driven marketing analysis." 
                     color="bg-rose-500"
                     tags={["AI", "Analytics"]}
-                    link="https://neuro-ad-analyzer-5qlbpk2wg-mariasebarespersonas-projects.vercel.app"
+                    link="https://neuro-retail-pro.vercel.app/"
                     icon={<Brain size={24} className="text-white" />}
                 />
             </div>
