@@ -197,39 +197,40 @@ function ProjectCard({
     secondaryLink,
 }: ProjectCardProps) {
     return (
-        <Card className="p-5 group hover:bg-neutral-900 transition-colors cursor-default flex flex-col justify-between h-full relative overflow-hidden">
+        <Card className="p-5 group hover:bg-neutral-900 transition-colors cursor-default flex flex-col h-full relative overflow-hidden">
                 {badge && (
                     <div className="absolute top-4 right-4 px-2 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                         <Trophy size={10} /> {badge}
                     </div>
                 )}
                 
-                <div className="flex justify-between items-start mb-4">
-                    <div className={`w-12 h-12 rounded-2xl ${color} flex items-center justify-center text-2xl shadow-lg ring-4 ring-black`}>
+                <div className="flex justify-between items-start mb-3">
+                    <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center text-xl shadow-lg ring-2 ring-black`}>
                         {icon || "🚀"}
                     </div>
                 </div>
                 
-                <div>
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
-                    <p className="text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-2">{desc}</p>
+                <div className="flex-1 flex flex-col min-h-0">
+                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors truncate">{title}</h3>
+                    <p className="text-neutral-400 text-xs leading-relaxed mb-3 line-clamp-2">{desc}</p>
                     
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5 mb-auto">
                         {tags.map(tag => (
-                            <span key={tag} className="px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] text-neutral-300 font-medium uppercase tracking-wider">
+                            <span key={tag} className="px-1.5 py-0.5 rounded bg-white/5 border border-white/5 text-[9px] text-neutral-300 font-medium uppercase tracking-wider">
                                 {tag}
                             </span>
                         ))}
                     </div>
+
                     {(link || (secondaryLink && secondaryLabel)) && (
-                        <div className="mt-4 flex flex-wrap gap-2">
+                        <div className="mt-3 flex flex-wrap gap-2 pt-2 border-t border-white/5">
                             {link && (
                                 <a
                                     href={link}
                                     target="_blank"
-                                    className="px-3 py-1 rounded-full bg-white text-black text-[11px] font-medium hover:bg-neutral-200 transition-colors flex items-center gap-1"
+                                    className="px-3 py-1.5 rounded-full bg-white text-black text-[10px] font-bold hover:bg-neutral-200 transition-colors flex items-center gap-1"
                                 >
-                                    <ArrowUpRight size={12} />
+                                    <ArrowUpRight size={10} />
                                     <span>Open app</span>
                                 </a>
                             )}
@@ -237,9 +238,9 @@ function ProjectCard({
                             <a
                                 href={secondaryLink}
                                 target="_blank"
-                                className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-200 hover:bg-white/10 transition-colors flex items-center gap-1"
+                                className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-neutral-200 hover:bg-white/10 transition-colors flex items-center gap-1"
                             >
-                                <Github size={12} />
+                                <Github size={10} />
                                 <span>{secondaryLabel}</span>
                             </a>
                             )}
