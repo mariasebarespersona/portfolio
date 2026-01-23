@@ -377,7 +377,7 @@ const BentoGrid = () => {
             <div className="col-span-1 row-span-1">
                 <ProjectCard 
                     title="Neuro Ad Analyzer" 
-                    desc="AI-driven marketing analysis." 
+                    desc="Neuroscience + AI to optimize brand marketing." 
                     color="bg-rose-500"
                     tags={["AI", "Analytics"]}
                     link="https://neuro-retail-pro.vercel.app/"
