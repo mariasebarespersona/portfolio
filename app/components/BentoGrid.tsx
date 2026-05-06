@@ -128,7 +128,7 @@ function IntroCard() {
                 AI Engineer & Data Scientist specializing in <span className="text-blue-400">Agentic AI</span> systems.
             </h2>
             <p className="text-neutral-400 mb-4 leading-relaxed">
-                Ex-IBM Engineer combining <span className="text-neutral-200 font-medium">enterprise rigor</span> with independent innovation. I architect <span className="text-neutral-200 font-medium">autonomous AI systems</span> that are robust, scalable, and ready for production—moving beyond simple demos to real-world impact.
+                Ex-IBM AI Engineer with a <span className="text-neutral-200 font-medium">Neuroscience background</span>, combining enterprise rigor with independent innovation. I architect <span className="text-neutral-200 font-medium">autonomous AI systems</span> that are robust, scalable, and ready for production—moving beyond simple demos to real-world impact.
             </p>
             <div className="flex gap-4 text-neutral-500 text-sm">
                 <span className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
