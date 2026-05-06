@@ -125,10 +125,10 @@ function IntroCard() {
                  <span className="text-xs font-medium text-green-500 uppercase tracking-wider">Available for work</span>
             </div>
             <h2 className="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight leading-tight">
-                AI Engineer & Data Scientist specializing in <span className="text-blue-400">Agentic AI</span> systems.
+                Founder building <span className="text-blue-400">Agentic AI</span> for clients across the US & Spain.
             </h2>
             <p className="text-neutral-400 mb-4 leading-relaxed">
-                Ex-IBM AI Engineer with a <span className="text-neutral-200 font-medium">Neuroscience background</span>, combining enterprise rigor with independent innovation. I architect <span className="text-neutral-200 font-medium">autonomous AI systems</span> that are robust, scalable, and ready for production—moving beyond simple demos to real-world impact.
+                Founder of <span className="text-neutral-200 font-medium">Tumai</span>, an AI consultancy shipping production-grade Agentic systems to clients in the <span className="text-neutral-200 font-medium">US and Spain</span>. Ex-IBM AI Engineer with a <span className="text-neutral-200 font-medium">Neuroscience background</span>—I architect autonomous AI that moves beyond demos into real-world impact.
             </p>
             <div className="flex gap-4 text-neutral-500 text-sm">
                 <span className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
@@ -196,8 +196,8 @@ function ProjectCard({
     return (
         <Card className="p-5 group hover:bg-neutral-900 transition-colors cursor-default flex flex-col justify-between h-full relative overflow-hidden">
                 {badge && (
-                    <div className="absolute top-4 right-4 px-2 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
-                        <Trophy size={10} /> {badge}
+                    <div className="absolute top-4 right-4 px-2.5 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-black border border-yellow-300 rounded-full text-[10px] font-extrabold uppercase tracking-wider flex items-center gap-1 shadow-lg shadow-yellow-500/30">
+                        <Trophy size={11} fill="currentColor" /> {badge}
                     </div>
                 )}
                 
@@ -247,14 +247,64 @@ function ProjectCard({
     );
 }
 
+function TumaiCard() {
+    return (
+        <Card className="h-full p-5 group bg-gradient-to-br from-violet-600/25 via-blue-600/15 to-cyan-500/10 border-violet-400/30 flex flex-col justify-between relative overflow-hidden cursor-default">
+            <div className="absolute top-4 right-4 px-2.5 py-1 bg-violet-500/20 text-violet-200 border border-violet-400/40 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
+                Founder
+            </div>
+
+            <div className="flex justify-between items-start mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-2xl font-black shadow-lg ring-4 ring-black text-white">
+                    T
+                </div>
+            </div>
+
+            <div>
+                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">Tumai</h3>
+                <p className="text-neutral-300 text-sm leading-relaxed mb-4 line-clamp-2">
+                    AI consultancy delivering production Agentic AI systems to clients across the US & Spain.
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                    {["Agentic AI", "RAG", "Production", "Consultancy"].map(tag => (
+                        <span key={tag} className="px-2 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] text-neutral-200 font-medium uppercase tracking-wider">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                    <a
+                        href="https://tumai.us"
+                        target="_blank"
+                        className="px-3 py-1 rounded-full bg-white text-black text-[11px] font-medium hover:bg-neutral-200 transition-colors flex items-center gap-1"
+                    >
+                        <ArrowUpRight size={12} />
+                        <span>tumai.us</span>
+                    </a>
+                    <a
+                        href="https://github.com/mariasebarespersona/Tum-AI"
+                        target="_blank"
+                        className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-200 hover:bg-white/10 transition-colors flex items-center gap-1"
+                    >
+                        <Github size={12} />
+                        <span>Platform</span>
+                    </a>
+                </div>
+            </div>
+        </Card>
+    );
+}
+
 function StackCard() {
-    // Stack updated for High-Ticket Client Attraction (End-to-End + Cloud)
     const stack = [
-        { name: "Agentic AI (LangGraph/DSPy)", icon: <Brain size={14} /> },
-        { name: "RAG & Vector DBs", icon: <Zap size={14} /> },
-        { name: "AWS & Cloud Architecture", icon: <Zap size={14} /> },
-        { name: "Python & FastAPI", icon: <Code size={14} /> },
-        { name: "React & Next.js", icon: <Code size={14} /> },
+        { name: "Agentic AI (LangGraph, DSPy)", icon: <Brain size={14} /> },
+        { name: "LLMs (Claude, GPT-4, Gemini)", icon: <Zap size={14} /> },
+        { name: "RAG & Vector DBs (pgvector)", icon: <Zap size={14} /> },
+        { name: "TypeScript & Python", icon: <Code size={14} /> },
+        { name: "Next.js & FastAPI", icon: <Code size={14} /> },
+        { name: "AWS & GCP", icon: <Zap size={14} /> },
     ];
     
     return (
@@ -343,23 +393,29 @@ const BentoGrid = () => {
             </div>
 
             {/* ROW 2 */}
-            {/* RoomieScore - spans 2 cols, 1 row */}
+            {/* Tumai - featured, spans 2 cols */}
             <div className="col-span-2 row-span-1">
-                <ProjectCard 
-                    title="RoomieScore" 
-                    desc="AI-powered roommate compatibility analyzer. Winner of the Cursor Hackathon." 
+                <TumaiCard />
+            </div>
+
+            {/* RoomieScore - spans 1 col, with prominent winner badge */}
+            <div className="col-span-1 row-span-1">
+                <ProjectCard
+                    title="RoomieScore"
+                    desc="AI roommate compatibility analyzer. 1st place at the Cursor Hackathon."
                     color="bg-purple-500"
                     tags={["React", "AI", "Vercel"]}
-                    badge="1st Place"
+                    badge="1st • Cursor"
                     link="https://roomiescore.vercel.app/dashboard"
                 />
             </div>
-            
-            {/* Neuro Ad Analyzer - spans 1 col, 1 row */}
+
+            {/* ROW 3 */}
+            {/* Neuro Ad Analyzer */}
             <div className="col-span-1 row-span-1">
-                <ProjectCard 
-                    title="Neuro Ad Analyzer" 
-                    desc="AI-driven marketing analysis." 
+                <ProjectCard
+                    title="Neuro Ad Analyzer"
+                    desc="AI-driven marketing analysis combining neuroscience and ML."
                     color="bg-rose-500"
                     tags={["AI", "Analytics"]}
                     link="https://neuro-retail-pro.vercel.app/"
@@ -367,15 +423,14 @@ const BentoGrid = () => {
                 />
             </div>
 
-            {/* ROW 3 */}
-            {/* Stack - spans 2 cols, 1 row */}
-            <div className="col-span-2 row-span-1">
+            {/* Stack */}
+            <div className="col-span-1 row-span-1">
                  <StackCard />
             </div>
 
-             {/* Contact - spans 2 cols, 1 row */}
+            {/* Contact - spans 2 cols */}
             <div className="col-span-2 row-span-1">
-                 <ContactCard /> 
+                 <ContactCard />
             </div>
 
         </motion.div>
