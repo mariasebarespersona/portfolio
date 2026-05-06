@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useMotionTemplate, AnimatePresence, type Variants } from "framer-motion";
-import { Github, Twitter, MapPin, ArrowUpRight, Mail, Globe, Zap, Code, Music, Send, FileText, Linkedin, Trophy, Brain } from "lucide-react";
-import Image from "next/image";
+import React, { useRef, useState } from "react";
+import { motion, useMotionValue, useMotionTemplate, type Variants } from "framer-motion";
+import { Github, MapPin, ArrowUpRight, Mail, Globe, Zap, Code, FileText, Linkedin, Trophy, Brain } from "lucide-react";
 
 // --- ANIMATION VARIANTS ---
 const containerVariants: Variants = {
@@ -129,7 +128,7 @@ function IntroCard() {
                 AI Engineer & Data Scientist specializing in <span className="text-blue-400">Agentic AI</span> systems.
             </h2>
             <p className="text-neutral-400 mb-4 leading-relaxed">
-                Ex-IBM AI Engineer with a <span className="text-neutral-200 font-medium">Neuroscience background</span>, combining enterprise rigor with independent innovation. I architect <span className="text-neutral-200 font-medium">autonomous AI systems</span> that are robust, scalable, and ready for production—moving beyond simple demos to real-world impact.
+                Ex-IBM Engineer combining <span className="text-neutral-200 font-medium">enterprise rigor</span> with independent innovation. I architect <span className="text-neutral-200 font-medium">autonomous AI systems</span> that are robust, scalable, and ready for production—moving beyond simple demos to real-world impact.
             </p>
             <div className="flex gap-4 text-neutral-500 text-sm">
                 <span className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
@@ -176,7 +175,6 @@ type ProjectCardProps = {
     desc: string;
     color: string;
     tags: string[];
-    wide?: boolean;
     link?: string;
     badge?: string;
     icon?: React.ReactNode;
@@ -189,7 +187,6 @@ function ProjectCard({
     desc,
     color,
     tags,
-    wide = false,
     link = "#",
     badge,
     icon,
@@ -197,40 +194,39 @@ function ProjectCard({
     secondaryLink,
 }: ProjectCardProps) {
     return (
-        <Card className="p-5 group hover:bg-neutral-900 transition-colors cursor-default flex flex-col h-full relative overflow-hidden">
+        <Card className="p-5 group hover:bg-neutral-900 transition-colors cursor-default flex flex-col justify-between h-full relative overflow-hidden">
                 {badge && (
                     <div className="absolute top-4 right-4 px-2 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                         <Trophy size={10} /> {badge}
                     </div>
                 )}
                 
-                <div className="flex justify-between items-start mb-3">
-                    <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center text-xl shadow-lg ring-2 ring-black`}>
+                <div className="flex justify-between items-start mb-4">
+                    <div className={`w-12 h-12 rounded-2xl ${color} flex items-center justify-center text-2xl shadow-lg ring-4 ring-black`}>
                         {icon || "🚀"}
                     </div>
                 </div>
                 
-                <div className="flex-1 flex flex-col min-h-0">
-                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors truncate">{title}</h3>
-                    <p className="text-neutral-400 text-xs leading-relaxed mb-3 line-clamp-2">{desc}</p>
+                <div>
+                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
+                    <p className="text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-2">{desc}</p>
                     
-                    <div className="flex flex-wrap gap-1.5 mb-auto">
+                    <div className="flex flex-wrap gap-2">
                         {tags.map(tag => (
-                            <span key={tag} className="px-1.5 py-0.5 rounded bg-white/5 border border-white/5 text-[9px] text-neutral-300 font-medium uppercase tracking-wider">
+                            <span key={tag} className="px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] text-neutral-300 font-medium uppercase tracking-wider">
                                 {tag}
                             </span>
                         ))}
                     </div>
-
                     {(link || (secondaryLink && secondaryLabel)) && (
-                        <div className="mt-3 flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                        <div className="mt-4 flex flex-wrap gap-2">
                             {link && (
                                 <a
                                     href={link}
                                     target="_blank"
-                                    className="px-3 py-1.5 rounded-full bg-white text-black text-[10px] font-bold hover:bg-neutral-200 transition-colors flex items-center gap-1"
+                                    className="px-3 py-1 rounded-full bg-white text-black text-[11px] font-medium hover:bg-neutral-200 transition-colors flex items-center gap-1"
                                 >
-                                    <ArrowUpRight size={10} />
+                                    <ArrowUpRight size={12} />
                                     <span>Open app</span>
                                 </a>
                             )}
@@ -238,9 +234,9 @@ function ProjectCard({
                             <a
                                 href={secondaryLink}
                                 target="_blank"
-                                className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-neutral-200 hover:bg-white/10 transition-colors flex items-center gap-1"
+                                className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-200 hover:bg-white/10 transition-colors flex items-center gap-1"
                             >
-                                <Github size={10} />
+                                <Github size={12} />
                                 <span>{secondaryLabel}</span>
                             </a>
                             )}
@@ -347,38 +343,23 @@ const BentoGrid = () => {
             </div>
 
             {/* ROW 2 */}
-            {/* Tumai Project - spans 2 cols, 1 row */}
-             <div className="col-span-2 row-span-1">
-                <ProjectCard 
-                    title="Tumai" 
-                    desc="AI-powered real estate investment platform." 
-                    color="bg-green-600"
-                    tags={["Python", "AI Agents", "Real Estate"]}
-                    wide={true}
-                    link="https://tumai-kappa.vercel.app"
-                    secondaryLabel="GitHub"
-                    secondaryLink="https://github.com/mariasebarespersona/tumai"
-                />
-            </div>
-            
-            {/* RoomieScore - spans 1 col, 1 row */}
-            <div className="col-span-1 row-span-1">
+            {/* RoomieScore - spans 2 cols, 1 row */}
+            <div className="col-span-2 row-span-1">
                 <ProjectCard 
                     title="RoomieScore" 
-                    desc="Cursor Hackathon Winner." 
+                    desc="AI-powered roommate compatibility analyzer. Winner of the Cursor Hackathon." 
                     color="bg-purple-500"
-                    tags={["React", "Vercel"]}
+                    tags={["React", "AI", "Vercel"]}
                     badge="1st Place"
                     link="https://roomiescore.vercel.app/dashboard"
                 />
             </div>
-
-            {/* ROW 3 */}
-            {/* Neuro Ad - spans 1 col, 1 row */}
+            
+            {/* Neuro Ad Analyzer - spans 1 col, 1 row */}
             <div className="col-span-1 row-span-1">
                 <ProjectCard 
                     title="Neuro Ad Analyzer" 
-                    desc="Neuroscience + AI to optimize brand marketing." 
+                    desc="AI-driven marketing analysis." 
                     color="bg-rose-500"
                     tags={["AI", "Analytics"]}
                     link="https://neuro-retail-pro.vercel.app/"
@@ -386,8 +367,9 @@ const BentoGrid = () => {
                 />
             </div>
 
-            {/* Stack - spans 1 col, 1 row */}
-            <div className="col-span-1 row-span-1">
+            {/* ROW 3 */}
+            {/* Stack - spans 2 cols, 1 row */}
+            <div className="col-span-2 row-span-1">
                  <StackCard />
             </div>
 
