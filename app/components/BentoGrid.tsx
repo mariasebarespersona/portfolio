@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useMotionTemplate, type Variants } from "framer-motion";
-import { Github, MapPin, ArrowUpRight, Mail, Globe, Zap, Code, FileText, Linkedin, Trophy, Brain } from "lucide-react";
+import { Github, MapPin, ArrowUpRight, Mail, Globe, Zap, Code, FileText, Linkedin, Trophy, Brain, Calendar } from "lucide-react";
 
 // --- ANIMATION VARIANTS ---
 const containerVariants: Variants = {
@@ -107,7 +107,7 @@ function MemojiCard() {
                 <h1 className="text-3xl font-bold text-white tracking-tight mb-1">MarIA</h1>
                 <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-full bg-white/10 border border-white/10 text-xs text-neutral-300 backdrop-blur-md">
-                        AI Engineer & Data Scientist
+                        Founder · Tumai
                     </span>
                 </div>
             </div>
@@ -122,7 +122,7 @@ function IntroCard() {
         <Card className="h-full flex flex-col justify-center p-6 bg-neutral-900/40">
             <div className="flex items-center gap-2 mb-4">
                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                 <span className="text-xs font-medium text-green-500 uppercase tracking-wider">Available for work</span>
+                 <span className="text-xs font-medium text-green-500 uppercase tracking-wider">Open for client projects</span>
             </div>
             <h2 className="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight leading-tight">
                 Founder building <span className="text-blue-400">Agentic AI</span> for clients across the US & Spain.
@@ -156,17 +156,27 @@ function ResumeCard({ className = "" }: { className?: string }) {
     );
 }
 
-function LinkedInCard({ className = "" }: { className?: string }) {
+function SocialsCard({ className = "" }: { className?: string }) {
     return (
-        <a href="https://www.linkedin.com/in/maria-sebares9" target="_blank" className={`block ${className}`}>
-            <Card className="h-full flex flex-col justify-center items-center bg-[#0077b5]/10 hover:bg-[#0077b5]/20 transition-colors group cursor-pointer border-[#0077b5]/20">
-                <div className="w-12 h-12 rounded-full bg-[#0077b5] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg">
-                    <Linkedin className="text-white w-6 h-6" />
-                </div>
-                <span className="text-white font-medium">LinkedIn</span>
-                <span className="text-[#0077b5] text-xs mt-1">Connect</span>
-            </Card>
-        </a>
+        <div className={`grid grid-cols-2 gap-2 ${className}`}>
+            <a href="https://www.linkedin.com/in/maria-sebares9" target="_blank" className="block h-full">
+                <Card className="h-full flex flex-col justify-center items-center bg-[#0077b5]/10 hover:bg-[#0077b5]/20 transition-colors group cursor-pointer border-[#0077b5]/20 !p-3">
+                    <div className="w-9 h-9 rounded-full bg-[#0077b5] flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                        <Linkedin className="text-white w-4 h-4" />
+                    </div>
+                    <span className="text-white text-[11px] font-medium mt-2">LinkedIn</span>
+                </Card>
+            </a>
+            {/* TODO: replace href with your X handle, e.g. https://x.com/<your-handle> */}
+            <a href="https://x.com/" target="_blank" className="block h-full">
+                <Card className="h-full flex flex-col justify-center items-center bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer !p-3">
+                    <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg ring-1 ring-white/10">
+                        <span className="text-white font-bold text-base leading-none">𝕏</span>
+                    </div>
+                    <span className="text-white text-[11px] font-medium mt-2">Twitter / X</span>
+                </Card>
+            </a>
+        </div>
     );
 }
 
@@ -262,12 +272,21 @@ function TumaiCard() {
 
             <div>
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">Tumai</h3>
-                <p className="text-neutral-300 text-sm leading-relaxed mb-4 line-clamp-2">
-                    AI consultancy delivering production Agentic AI systems to clients across the US & Spain.
+                <p className="text-neutral-300 text-sm leading-relaxed mb-3 line-clamp-2">
+                    Agentic AI that doesn&apos;t break in production. Built for teams that need real systems, not demos.
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                    {["Agentic AI", "RAG", "Production", "Consultancy"].map(tag => (
+                {/* TODO: replace with real metrics once public (e.g. "8 clients", "$XXk ARR") */}
+                <div className="flex items-center gap-3 text-[10px] text-neutral-400 uppercase tracking-wider font-semibold mb-3 border-y border-white/5 py-2">
+                    <span><span className="text-white">2</span> Countries</span>
+                    <span className="text-neutral-700">·</span>
+                    <span><span className="text-white">US</span> & <span className="text-white">ES</span></span>
+                    <span className="text-neutral-700">·</span>
+                    <span className="text-violet-300">Production-grade</span>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-3">
+                    {["Agentic AI", "RAG", "LangGraph", "DSPy"].map(tag => (
                         <span key={tag} className="px-2 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] text-neutral-200 font-medium uppercase tracking-wider">
                             {tag}
                         </span>
@@ -325,35 +344,50 @@ function StackCard() {
 function ContactCard() {
     const [copied, setCopied] = useState(false);
 
-    const handleCopy = () => {
+    const handleCopy = (e: React.MouseEvent) => {
+        e.stopPropagation();
         navigator.clipboard.writeText("mariasebares9@gmail.com");
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
 
     return (
-        <Card 
-            onClick={handleCopy}
-            className="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-600 to-blue-500 border-none !p-0 overflow-hidden group cursor-pointer relative"
+        <Card
+            className="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-600 to-blue-500 border-none !p-0 overflow-hidden group relative"
         >
-            <div className="h-full w-full p-8 flex items-center justify-between relative z-10">
-                <div>
-                    <h3 className="text-3xl font-bold text-white mb-1">
+            <div className="h-full w-full p-6 md:p-8 flex items-center justify-between relative z-10 gap-4">
+                <div className="min-w-0">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-1 truncate">
                         {copied ? "Email Copied!" : "Let's work together"}
                     </h3>
-                    <p className="text-blue-100 text-sm">
-                        {copied ? "mariasebares9@gmail.com" : "I'm currently open to new opportunities."}
+                    <p className="text-blue-100 text-sm truncate">
+                        {copied ? "mariasebares9@gmail.com" : "Taking on new client projects this quarter."}
                     </p>
                 </div>
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl">
-                    {copied ? (
-                         <div className="text-blue-600 font-bold text-xl">✓</div>
-                    ) : (
-                        <Mail className="text-blue-600 w-6 h-6" />
-                    )}
+                <div className="flex items-center gap-2 shrink-0">
+                    {/* TODO: replace with your real Cal.com link, e.g. https://cal.com/maria */}
+                    <a
+                        href="https://cal.com/"
+                        target="_blank"
+                        onClick={(e) => e.stopPropagation()}
+                        className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full bg-white text-blue-600 text-xs font-bold hover:bg-blue-50 transition-colors shadow-lg"
+                    >
+                        <Calendar size={14} />
+                        <span>Book a 15 min</span>
+                    </a>
+                    <button
+                        onClick={handleCopy}
+                        aria-label="Copy email"
+                        className="w-11 h-11 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl cursor-pointer"
+                    >
+                        {copied ? (
+                             <div className="text-blue-600 font-bold text-xl">✓</div>
+                        ) : (
+                            <Mail className="text-blue-600 w-5 h-5" />
+                        )}
+                    </button>
                 </div>
             </div>
-            {/* Animated Background Gradient */}
             <div className="absolute inset-0 opacity-50 bg-[radial-gradient(circle_at_right,_rgba(255,255,255,0.4),transparent)]" />
         </Card>
     );
@@ -363,13 +397,13 @@ function ContactCard() {
 
 const BentoGrid = () => {
   return (
-    <div className="h-screen w-screen bg-neutral-950 text-white p-4 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen w-screen bg-neutral-950 text-white p-4 flex items-center justify-center relative overflow-x-hidden md:h-screen md:overflow-hidden">
         
         {/* Background Noise */}
         <div className="fixed inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
         
         <motion.div 
-            className="max-w-6xl w-full h-full max-h-[90vh] grid grid-cols-2 md:grid-cols-4 grid-rows-3 gap-3"
+            className="max-w-6xl w-full h-auto md:h-full md:max-h-[90vh] grid grid-cols-2 md:grid-cols-4 md:grid-rows-3 gap-3"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -386,10 +420,10 @@ const BentoGrid = () => {
                 <IntroCard />
             </div>
             
-            {/* Stacked Resume & LinkedIn - spans 1 col, 1 row */}
+            {/* Stacked Resume & Socials - spans 1 col, 1 row */}
             <div className="col-span-1 row-span-1 flex flex-col gap-3">
                 <ResumeCard className="flex-1" />
-                <LinkedInCard className="flex-1" />
+                <SocialsCard className="flex-1" />
             </div>
 
             {/* ROW 2 */}
@@ -416,7 +450,7 @@ const BentoGrid = () => {
                 <ProjectCard
                     title="Neuro Ad Analyzer"
                     desc="AI-driven marketing analysis combining neuroscience and ML."
-                    color="bg-rose-500"
+                    color="bg-indigo-500"
                     tags={["AI", "Analytics"]}
                     link="https://neuro-retail-pro.vercel.app/"
                     icon={<Brain size={24} className="text-white" />}
