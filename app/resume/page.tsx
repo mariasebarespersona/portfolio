@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import { Mail, Phone, MapPin, Download, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -58,7 +58,7 @@ export default function ResumePage() {
         <section className="mb-8">
             <h2 className="text-lg font-bold uppercase border-b border-neutral-300 pb-1 mb-3">Professional Summary</h2>
             <p className="text-sm leading-relaxed text-neutral-800 text-justify">
-                AI Engineer and Data Scientist with over 3 years of experience specialising in cutting-edge Agentic AI systems and 'full-stack' AI/ML system workflows. Expert in building, deploying, and scaling intelligent Agentic AI solutions using frameworks like DSPy and LangGraph. Adept at leveraging cloud platforms (GCP, AWS) to develop scalable APIs and integrate advanced conversational logic. Proven track record of engaging clients to translate business needs into robust AI-enabled solutions. Committed to advancing the field of AI with a strong foundation in neuroscience and continuous professional growth.
+                AI Engineer and Data Scientist with over 3 years of experience specialising in cutting-edge Agentic AI systems and &apos;full-stack&apos; AI/ML system workflows. Expert in building, deploying, and scaling intelligent Agentic AI solutions using frameworks like DSPy and LangGraph. Adept at leveraging cloud platforms (GCP, AWS) to develop scalable APIs and integrate advanced conversational logic. Proven track record of engaging clients to translate business needs into robust AI-enabled solutions. Committed to advancing the field of AI with a strong foundation in neuroscience and continuous professional growth.
             </p>
         </section>
 
