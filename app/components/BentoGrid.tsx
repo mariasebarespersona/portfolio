@@ -61,7 +61,7 @@ function Card({ children, className = "", spotlight = true, noPadding = false, o
           }}
         />
       )}
-      <div className={`relative h-full z-0 ${noPadding ? '' : 'p-6'}`}>{children}</div>
+      <div className={`relative h-full z-0 ${noPadding ? '' : 'p-4 md:p-5'}`}>{children}</div>
     </motion.div>
   );
 }
@@ -124,7 +124,7 @@ function MemojiCard() {
             </div>
 
             <div className="absolute bottom-6 left-6 z-20">
-                <h1 className="text-3xl font-bold text-[#26211b] tracking-tight mb-1">MarIA</h1>
+                <h1 className="text-2xl font-bold text-[#26211b] tracking-tight mb-1">MarIA</h1>
                 <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-full bg-transparent border border-[#9a7a4c]/40 text-[10px] text-[#9a7a4c] uppercase tracking-[0.18em] backdrop-blur-md">
                         Founder · Tumai
@@ -139,15 +139,15 @@ function MemojiCard() {
 
 function IntroCard() {
     return (
-        <Card className="h-full flex flex-col justify-center p-6">
-            <div className="flex items-center gap-2 mb-4">
+        <Card className="h-full flex flex-col justify-center">
+            <div className="flex items-center gap-2 mb-3">
                  <div className="w-1.5 h-1.5 rounded-full bg-[#9a7a4c] animate-pulse" />
                  <span className="text-[10px] font-medium text-[#9a7a4c] uppercase tracking-[0.22em]">Open for client projects</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-normal text-[#26211b] mb-4 tracking-tight leading-[1.15]">
+            <h2 className="text-2xl md:text-3xl font-normal text-[#26211b] mb-3 tracking-tight leading-[1.15]">
                 Founder building <span className="italic text-[#9a7a4c]">Agentic AI</span> for clients across the US &amp; Spain.
             </h2>
-            <p className="text-[#6f6657] mb-4 leading-relaxed">
+            <p className="text-[#6f6657] text-sm md:text-[15px] mb-3 leading-relaxed">
                 Founder of <span className="text-[#26211b] font-medium">Tumai</span>, where I build <span className="text-[#26211b] font-medium">AI agents that automate real estate operations</span> over WhatsApp, connected directly to clients&apos; CRMs—with paying customers in production in the <span className="text-[#26211b] font-medium">US and Spain</span>. <span className="text-[#26211b] font-medium">Ex-IBM AI Engineer</span> with a <span className="text-[#26211b] font-medium">Neuroscience background</span>—I architect autonomous AI that moves beyond demos into real-world impact.
             </p>
             <div className="flex gap-4 text-[#6f6657] text-sm">
@@ -166,8 +166,8 @@ function ResumeCard({ className = "" }: { className?: string }) {
     return (
         <a href="/resume" className={`block ${className}`}>
             <Card className="h-full flex flex-col justify-center items-center bg-[#f4eee0] hover:bg-[#ebe3d2] transition-colors group cursor-pointer">
-                <div className="w-12 h-12 rounded-full bg-[#161310] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <FileText className="text-white w-6 h-6" />
+                <div className="w-10 h-10 rounded-full bg-[#161310] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                    <FileText className="text-white w-5 h-5" />
                 </div>
                 <span className="text-[#26211b] font-medium">Resume / CV</span>
                 <span className="text-[#6f6657] text-xs mt-1">View History</span>
@@ -231,15 +231,15 @@ function ProjectCard({
                     </div>
                 )}
 
-                <div className="flex justify-between items-start mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#161310] flex items-center justify-center text-2xl">
+                <div className="flex justify-between items-start mb-3">
+                    <div className="w-10 h-10 rounded-2xl bg-[#161310] flex items-center justify-center text-xl">
                         {icon || "🚀"}
                     </div>
                 </div>
 
                 <div>
-                    <h3 className="text-2xl font-bold text-[#26211b] mb-2 group-hover:text-[#9a7a4c] transition-colors">{title}</h3>
-                    <p className="text-[#6f6657] text-sm leading-relaxed mb-4">{desc}</p>
+                    <h3 className="text-xl font-bold text-[#26211b] mb-1.5 group-hover:text-[#9a7a4c] transition-colors">{title}</h3>
+                    <p className="text-[#6f6657] text-sm leading-relaxed mb-3">{desc}</p>
 
                     <div className="flex flex-wrap gap-2">
                         {tags.map(tag => (
@@ -249,7 +249,7 @@ function ProjectCard({
                         ))}
                     </div>
                     {(link || (secondaryLink && secondaryLabel)) && (
-                        <div className="mt-4 flex flex-wrap gap-2">
+                        <div className="mt-3 flex flex-wrap gap-2">
                             {link && (
                                 <a
                                     href={link}
@@ -284,14 +284,14 @@ function TumaiCard() {
                 Founder
             </div>
 
-            <div className="flex justify-between items-start mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#161310] flex items-center justify-center text-2xl font-black text-white">
+            <div className="flex justify-between items-start mb-3">
+                <div className="w-10 h-10 rounded-2xl bg-[#161310] flex items-center justify-center text-xl font-black text-white">
                     T
                 </div>
             </div>
 
             <div>
-                <h3 className="text-3xl font-normal text-[#26211b] mb-2 group-hover:text-[#9a7a4c] transition-colors">Tumai</h3>
+                <h3 className="text-2xl font-normal text-[#26211b] mb-1.5 group-hover:text-[#9a7a4c] transition-colors">Tumai</h3>
                 <p className="text-[#6f6657] text-sm leading-relaxed mb-3">
                     AI agents that automate real estate operations end-to-end—running over WhatsApp and plugged straight into your CRM. Rent collection, tenant comms, property evaluation and reporting, on autopilot.
                 </p>
@@ -365,12 +365,13 @@ function ContactCard() {
 
     return (
         <Card
-            className="col-span-1 col-span-2 border-none !p-0 overflow-hidden group relative"
+            className="border-none overflow-hidden group relative"
+            noPadding
         >
             <div className="absolute inset-0 bg-[#161310] z-0" />
-            <div className="h-full w-full p-6 md:p-8 flex items-center justify-between relative z-10 gap-4">
+            <div className="h-full w-full p-5 md:p-6 flex items-center justify-between relative z-10 gap-4">
                 <div className="min-w-0">
-                    <h3 className="text-3xl md:text-4xl font-normal text-[#efe6d4] mb-1">
+                    <h3 className="text-2xl md:text-3xl font-normal text-[#efe6d4] mb-1">
                         {copied ? "Email Copied!" : "Let's work together"}
                     </h3>
                     <p className="text-[#efe6d4]/60 text-sm">
@@ -406,97 +407,47 @@ function ContactCard() {
     );
 }
 
-// --- FIT-TO-VIEWPORT ---
-// Scales the whole layout so everything is visible on one screen
-// (desktop and mobile) with no scrolling and nothing cut off.
-function FitToViewport({ children }: { children: React.ReactNode }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const [scale, setScale] = useState(0);
-
-    React.useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const compute = () => {
-            const cw = el.scrollWidth;
-            const ch = el.scrollHeight;
-            if (!cw || !ch) return;
-            const vw = window.innerWidth;
-            const vh = window.visualViewport?.height ?? window.innerHeight;
-            const pad = 24;
-            setScale(Math.min((vw - pad) / cw, (vh - pad) / ch, 1));
-        };
-        compute();
-        const ro = new ResizeObserver(compute);
-        ro.observe(el);
-        window.addEventListener("resize", compute);
-        window.visualViewport?.addEventListener("resize", compute);
-        return () => {
-            ro.disconnect();
-            window.removeEventListener("resize", compute);
-            window.visualViewport?.removeEventListener("resize", compute);
-        };
-    }, []);
-
-    return (
-        <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
-            <div
-                ref={ref}
-                style={{
-                    width: 1080,
-                    transform: `scale(${scale || 1})`,
-                    transformOrigin: "center center",
-                    opacity: scale ? 1 : 0,
-                    transition: "opacity 0.2s ease",
-                }}
-            >
-                {children}
-            </div>
-        </div>
-    );
-}
-
 // --- MAIN BENTO GRID ---
 
 const BentoGrid = () => {
   return (
-    <div className="fixed inset-0 bg-[#f0e9da] text-[#26211b] overflow-hidden">
+    <div className="min-h-[100dvh] w-full bg-[#f0e9da] text-[#26211b] flex items-center justify-center relative overflow-x-hidden p-3 md:p-5 lg:p-6">
 
         {/* Background Noise */}
         <div className="fixed inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
 
-        <FitToViewport>
         <motion.div
-            className="w-full grid grid-cols-4 auto-rows-[minmax(0,auto)] gap-3"
+            className="w-full max-w-[1400px] grid grid-cols-1 md:grid-cols-4 auto-rows-[minmax(0,auto)] gap-2.5 md:gap-3"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
         >
 
             {/* ROW 1 — Intro (2) + Resume (1) + Socials (1) */}
-            <div className="col-span-2 row-span-1">
+            <div className="md:col-span-2 row-span-1">
                 <IntroCard />
             </div>
 
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 row-span-1">
                 <ResumeCard className="h-full" />
             </div>
 
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 row-span-1">
                 <SocialsCard className="h-full" />
             </div>
 
             {/* ROW 2 — Tumai (1) + MarIA centerpiece (2) + RoomieScore (1) */}
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 row-span-1">
                 <TumaiCard />
             </div>
 
             {/* MarIA - featured centerpiece, mouse-scrub avatar */}
-            <div className="h-full col-span-2 row-span-1">
+            <div className="aspect-[4/5] md:aspect-auto md:h-full md:col-span-2 row-span-1">
                  <MemojiCard />
             </div>
 
             {/* RoomieScore - spans 1 col, with prominent winner badge */}
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 row-span-1">
                 <ProjectCard
                     title="RoomieScore"
                     desc="AI roommate compatibility analyzer. 1st place at the Cursor Hackathon."
@@ -507,7 +458,7 @@ const BentoGrid = () => {
             </div>
 
             {/* ROW 3 — Neuro (1) + Stack (1) + REDAE (2) */}
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 row-span-1">
                 <ProjectCard
                     title="Neuro Ad Analyzer"
                     desc="AI-driven marketing analysis combining neuroscience and ML."
@@ -518,12 +469,12 @@ const BentoGrid = () => {
             </div>
 
             {/* Stack */}
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 row-span-1">
                  <StackCard />
             </div>
 
             {/* REDAE Capital - client website design, spans 2 cols */}
-            <div className="col-span-2 row-span-1">
+            <div className="md:col-span-2 row-span-1">
                 <ProjectCard
                     title="REDAE Capital"
                     desc="Designed and built the corporate website for REDAE Capital, a private equity and real estate firm connecting investors between Latin America and Europe across luxury hospitality and residential developments in Spain."
@@ -535,12 +486,11 @@ const BentoGrid = () => {
             </div>
 
             {/* Contact - full width */}
-            <div className="col-span-4 row-span-1">
+            <div className="md:col-span-4 row-span-1">
                  <ContactCard />
             </div>
 
         </motion.div>
-        </FitToViewport>
     </div>
   );
 };
