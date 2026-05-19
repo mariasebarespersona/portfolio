@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Ovo, Jost } from "next/font/google";
 import "./globals.css";
 
@@ -12,6 +12,11 @@ const jost = Jost({
   variable: "--font-body",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tumai.us"),

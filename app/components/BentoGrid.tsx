@@ -84,8 +84,8 @@ function MemojiCard() {
   };
 
     return (
-        <div className="col-span-1 row-span-2 h-full">
-            <Card className="h-full aspect-auto group relative bg-[#f5f5f5]" noPadding>
+        <div className="h-full">
+            <Card className="h-full group relative bg-[#f5f5f5]" noPadding>
             <div 
                 ref={containerRef}
                 onMouseMove={handleMouseMove}
@@ -394,38 +394,38 @@ const BentoGrid = () => {
         {/* Background Noise */}
         <div className="fixed inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
         
-        <motion.div 
-            className="max-w-6xl w-full grid grid-cols-2 md:grid-cols-4 auto-rows-[minmax(0,auto)] gap-3"
+        <motion.div
+            className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-4 auto-rows-[minmax(0,auto)] gap-3"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
         >
-            
+
             {/* ROW 1 */}
-            {/* Memoji - spans 2 rows vertically */}
-            <div className="col-span-1 row-span-2">
-                 <MemojiCard /> 
+            {/* Memoji - spans 2 rows vertically on desktop */}
+            <div className="aspect-[4/5] md:aspect-auto md:h-full md:col-span-1 md:row-span-2">
+                 <MemojiCard />
             </div>
-            
+
             {/* Intro - spans 2 cols, 1 row */}
-            <div className="col-span-2 row-span-1">
+            <div className="md:col-span-2 md:row-span-1">
                 <IntroCard />
             </div>
-            
+
             {/* Stacked Resume & Socials - spans 1 col, 1 row */}
-            <div className="col-span-1 row-span-1 flex flex-col gap-3">
+            <div className="md:col-span-1 md:row-span-1 flex flex-col gap-3">
                 <ResumeCard className="flex-1" />
                 <SocialsCard className="flex-1" />
             </div>
 
             {/* ROW 2 */}
             {/* Tumai - featured, spans 2 cols */}
-            <div className="col-span-2 row-span-1">
+            <div className="md:col-span-2 md:row-span-1">
                 <TumaiCard />
             </div>
 
             {/* RoomieScore - spans 1 col, with prominent winner badge */}
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 md:row-span-1">
                 <ProjectCard
                     title="RoomieScore"
                     desc="AI roommate compatibility analyzer. 1st place at the Cursor Hackathon."
@@ -437,7 +437,7 @@ const BentoGrid = () => {
 
             {/* ROW 3 */}
             {/* Neuro Ad Analyzer */}
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 md:row-span-1">
                 <ProjectCard
                     title="Neuro Ad Analyzer"
                     desc="AI-driven marketing analysis combining neuroscience and ML."
@@ -448,12 +448,12 @@ const BentoGrid = () => {
             </div>
 
             {/* Stack */}
-            <div className="col-span-1 row-span-1">
+            <div className="md:col-span-1 md:row-span-1">
                  <StackCard />
             </div>
 
             {/* REDAE Capital - client website design, spans 2 cols */}
-            <div className="col-span-2 row-span-1">
+            <div className="md:col-span-2 md:row-span-1">
                 <ProjectCard
                     title="REDAE Capital"
                     desc="Designed and built the corporate website for REDAE Capital, a private equity and real estate firm connecting investors between Latin America and Europe across luxury hospitality and residential developments in Spain."
@@ -465,7 +465,7 @@ const BentoGrid = () => {
             </div>
 
             {/* Contact - full width */}
-            <div className="col-span-2 md:col-span-4 row-span-1">
+            <div className="md:col-span-4 md:row-span-1">
                  <ContactCard />
             </div>
 

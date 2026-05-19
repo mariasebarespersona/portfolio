@@ -114,7 +114,7 @@ export default function ResumePage() {
             </div>
         </section>
 
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Skills */}
             <section>
                 <h2 className="text-lg font-bold uppercase border-b border-neutral-300 pb-1 mb-3">Skills</h2>
@@ -154,7 +154,7 @@ export default function ResumePage() {
 
         {/* Certifications & Languages */}
         <section className="mt-8 pt-4 border-t border-neutral-200">
-             <div className="grid grid-cols-2 gap-8">
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div>
                     <h3 className="text-sm font-bold uppercase mb-2">Certifications & Awards</h3>
                     <ul className="list-disc list-outside ml-4 text-xs text-neutral-800 space-y-1">
