@@ -81,10 +81,18 @@ function MemojiCard() {
 
   React.useEffect(() => {
     if (isTouch) return;
-    // Follow the cursor across the whole page: sweeping left→right scrubs the
-    // entire look-around clip (up, side, down, smile) so every pose is reachable.
+    // Make the avatar look TOWARD the cursor. The clip sweeps gaze direction
+    // over time: east≈0.0 (forward), north≈0.25 (up), west≈0.5 (left),
+    // south≈0.75 (down). So map the cursor's angle around the face to that
+    // same 0..1 position — the head turns to wherever the pointer is.
     const onMove = (e: PointerEvent) => {
-      targetRef.current = Math.max(0, Math.min(1, e.clientX / window.innerWidth));
+      const v = videoRef.current;
+      if (!v) return;
+      const r = v.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = r.top + r.height / 2 - e.clientY; // up = positive
+      const ang = (Math.atan2(dy, dx) * 180) / Math.PI; // 0=east, 90=north
+      targetRef.current = ((ang % 360) + 360) % 360 / 360;
     };
     window.addEventListener("pointermove", onMove);
 
@@ -92,10 +100,13 @@ function MemojiCard() {
     const tick = () => {
       const v = videoRef.current;
       if (v && isFinite(v.duration) && v.duration > 0) {
-        // Ease current toward target for a smooth, fluid follow.
-        currentRef.current += (targetRef.current - currentRef.current) * 0.16;
-        if (Math.abs(targetRef.current - currentRef.current) < 0.0015) {
-          currentRef.current = targetRef.current; // snap so extremes are exact
+        // Shortest-path easing on the circular 0..1 domain (clip loops).
+        let d = targetRef.current - currentRef.current;
+        d -= Math.round(d); // wrap to [-0.5, 0.5]
+        if (Math.abs(d) < 0.0015) {
+          currentRef.current = targetRef.current;
+        } else {
+          currentRef.current = (currentRef.current + d * 0.16 + 1) % 1;
         }
         const t = currentRef.current * v.duration;
         if (Math.abs(t - v.currentTime) > 0.002) {
