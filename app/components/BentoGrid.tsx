@@ -188,6 +188,7 @@ type ProjectCardProps = {
     link?: string;
     badge?: string;
     icon?: React.ReactNode;
+    linkLabel?: string;
     secondaryLabel?: string;
     secondaryLink?: string;
 };
@@ -200,6 +201,7 @@ function ProjectCard({
     link = "#",
     badge,
     icon,
+    linkLabel = "Open app",
     secondaryLabel,
     secondaryLink,
 }: ProjectCardProps) {
@@ -219,7 +221,7 @@ function ProjectCard({
                 
                 <div>
                     <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
-                    <p className="text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-2">{desc}</p>
+                    <p className="text-neutral-400 text-sm leading-relaxed mb-4">{desc}</p>
                     
                     <div className="flex flex-wrap gap-2">
                         {tags.map(tag => (
@@ -237,7 +239,7 @@ function ProjectCard({
                                     className="px-3 py-1 rounded-full bg-white text-black text-[11px] font-medium hover:bg-neutral-200 transition-colors flex items-center gap-1"
                                 >
                                     <ArrowUpRight size={12} />
-                                    <span>Open app</span>
+                                    <span>{linkLabel}</span>
                                 </a>
                             )}
                             {secondaryLink && secondaryLabel && (
@@ -272,7 +274,7 @@ function TumaiCard() {
 
             <div>
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">Tumai</h3>
-                <p className="text-neutral-300 text-sm leading-relaxed mb-3 line-clamp-3">
+                <p className="text-neutral-300 text-sm leading-relaxed mb-3">
                     AI agents that automate real estate operations end-to-end—running over WhatsApp and plugged straight into your CRM. Rent collection, tenant comms, property evaluation and reporting, on autopilot.
                 </p>
 
@@ -356,10 +358,10 @@ function ContactCard() {
         >
             <div className="h-full w-full p-6 md:p-8 flex items-center justify-between relative z-10 gap-4">
                 <div className="min-w-0">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-1 truncate">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">
                         {copied ? "Email Copied!" : "Let's work together"}
                     </h3>
-                    <p className="text-blue-100 text-sm truncate">
+                    <p className="text-blue-100 text-sm">
                         {copied ? "mariasebares9@gmail.com" : "Taking on new client projects this quarter."}
                     </p>
                 </div>
@@ -396,13 +398,13 @@ function ContactCard() {
 
 const BentoGrid = () => {
   return (
-    <div className="min-h-screen w-screen bg-neutral-950 text-white p-4 flex items-center justify-center relative overflow-x-hidden md:h-screen md:overflow-hidden">
+    <div className="min-h-screen w-full bg-neutral-950 text-white p-4 md:p-6 flex items-start justify-center relative overflow-x-hidden">
         
         {/* Background Noise */}
         <div className="fixed inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
         
         <motion.div 
-            className="max-w-6xl w-full h-auto md:h-full md:max-h-[90vh] grid grid-cols-2 md:grid-cols-4 md:grid-rows-3 gap-3"
+            className="max-w-6xl w-full grid grid-cols-2 md:grid-cols-4 auto-rows-[minmax(0,auto)] gap-3"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -461,8 +463,21 @@ const BentoGrid = () => {
                  <StackCard />
             </div>
 
-            {/* Contact - spans 2 cols */}
+            {/* REDAE Capital - client website design, spans 2 cols */}
             <div className="col-span-2 row-span-1">
+                <ProjectCard
+                    title="REDAE Capital"
+                    desc="Designed and built the corporate website for REDAE Capital, a private equity and real estate firm connecting investors between Latin America and Europe across luxury hospitality and residential developments in Spain."
+                    color="bg-emerald-600"
+                    tags={["Web Design", "Next.js", "Client Work"]}
+                    link="https://www.redaecapital.com/"
+                    linkLabel="Visit site"
+                    icon={<Globe size={24} className="text-white" />}
+                />
+            </div>
+
+            {/* Contact - full width */}
+            <div className="col-span-2 md:col-span-4 row-span-1">
                  <ContactCard />
             </div>
 
