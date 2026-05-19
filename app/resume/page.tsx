@@ -10,20 +10,20 @@ export default function ResumePage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-900 py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+    <div className="min-h-screen bg-[#161310] py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
       
       {/* Navigation & Actions */}
       <div className="w-full max-w-4xl flex justify-between items-center mb-8 print:hidden">
         <Link 
             href="/"
-            className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
+            className="flex items-center gap-2 text-[#efe6d4]/70 hover:text-[#efe6d4] transition-colors"
         >
             <ArrowLeft size={20} />
             <span>Back to Portfolio</span>
         </Link>
         <button 
             onClick={handlePrint}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium transition-colors"
+            className="flex items-center gap-2 px-5 py-2 bg-transparent border border-[#9a7a4c]/50 text-[#efe6d4] text-xs uppercase tracking-[0.18em] hover:bg-[#9a7a4c] hover:text-[#161310] rounded-full font-medium transition-colors"
         >
             <Download size={18} />
             <span>Download PDF</span>

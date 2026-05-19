@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Ovo, Jost } from "next/font/google";
+import { Cormorant_Garamond, EB_Garamond } from "next/font/google";
 import "./globals.css";
 
-const ovo = Ovo({
-  weight: "400",
+const cormorant = Cormorant_Garamond({
+  weight: ["300", "400", "500", "600"],
   variable: "--font-heading",
   subsets: ["latin"],
 });
 
-const jost = Jost({
+const ebGaramond = EB_Garamond({
+  weight: ["400", "500"],
   variable: "--font-body",
   subsets: ["latin"],
 });
@@ -49,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ovo.variable} ${jost.variable} antialiased`}
+        className={`${cormorant.variable} ${ebGaramond.variable} antialiased`}
       >
         {children}
       </body>

@@ -6,19 +6,22 @@
 }
 
 :root {
-  /* Palette adapted from julianozen.com */
-  --color-bg: #fff;
-  --color-text: #1c1c1c;
-  --color-text-muted: #555;
-  --color-border: #1c1c1c;
-  --color-link: #1c1c1c;
+  /* Warm editorial palette — "The Art of Arriving" */
+  --color-bg: #f0e9da; /* cream paper */
+  --color-surface: #f4eee0; /* card surface */
+  --color-surface-alt: #ebe3d2; /* hover / secondary surface */
+  --color-dark: #161310; /* warm near-black */
+  --color-text: #26211b; /* primary text on cream */
+  --color-on-dark: #efe6d4; /* text on dark */
+  --color-text-muted: #6f6657; /* muted warm gray */
+  --color-accent: #9a7a4c; /* bronze / gold */
+  --color-border: #26211b;
 }
 
 body {
   color: var(--color-text);
   background: var(--color-bg);
-  font-family: var(--font-body), -apple-system, BlinkMacSystemFont,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body), Georgia, "Times New Roman", serif;
 }
 
 h1,
@@ -28,4 +31,5 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading), Georgia, serif;
+  font-weight: 400;
 }
