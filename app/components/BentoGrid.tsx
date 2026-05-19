@@ -121,14 +121,14 @@ function IntroCard() {
     return (
         <Card className="h-full flex flex-col justify-center p-6 bg-neutral-900/40">
             <div className="flex items-center gap-2 mb-4">
-                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                 <span className="text-xs font-medium text-green-500 uppercase tracking-wider">Open for client projects</span>
+                 <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                 <span className="text-xs font-medium text-emerald-400 uppercase tracking-wider">Open for client projects</span>
             </div>
             <h2 className="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight leading-tight">
-                Founder building <span className="text-blue-400">Agentic AI</span> for clients across the US & Spain.
+                Founder building <span className="text-teal-300">Agentic AI</span> for clients across the US & Spain.
             </h2>
             <p className="text-neutral-400 mb-4 leading-relaxed">
-                Founder of <span className="text-neutral-200 font-medium">Tumai</span>, where I build <span className="text-neutral-200 font-medium">AI agents that automate real estate operations</span> over WhatsApp, connected directly to clients&apos; CRMs—with paying customers in production in the <span className="text-neutral-200 font-medium">US and Spain</span>. Ex-IBM AI Engineer with a <span className="text-neutral-200 font-medium">Neuroscience background</span>—I architect autonomous AI that moves beyond demos into real-world impact.
+                Founder of <span className="text-neutral-200 font-medium">Tumai</span>, where I build <span className="text-neutral-200 font-medium">AI agents that automate real estate operations</span> over WhatsApp, connected directly to clients&apos; CRMs—with paying customers in production in the <span className="text-neutral-200 font-medium">US and Spain</span>. <span className="text-neutral-200 font-bold">Ex-IBM AI Engineer</span> with a <span className="text-neutral-200 font-medium">Neuroscience background</span>—I architect autonomous AI that moves beyond demos into real-world impact.
             </p>
             <div className="flex gap-4 text-neutral-500 text-sm">
                 <span className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
@@ -220,7 +220,7 @@ function ProjectCard({
                 </div>
                 
                 <div>
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-300 transition-colors">{title}</h3>
                     <p className="text-neutral-400 text-sm leading-relaxed mb-4">{desc}</p>
                     
                     <div className="flex flex-wrap gap-2">
@@ -261,19 +261,19 @@ function ProjectCard({
 
 function TumaiCard() {
     return (
-        <Card className="h-full p-5 group bg-gradient-to-br from-violet-600/25 via-blue-600/15 to-cyan-500/10 border-violet-400/30 flex flex-col justify-between relative overflow-hidden cursor-default">
-            <div className="absolute top-4 right-4 px-2.5 py-1 bg-violet-500/20 text-violet-200 border border-violet-400/40 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
+        <Card className="h-full p-5 group bg-gradient-to-br from-teal-500/15 via-emerald-500/10 to-cyan-500/5 border-teal-400/20 flex flex-col justify-between relative overflow-hidden cursor-default">
+            <div className="absolute top-4 right-4 px-2.5 py-1 bg-teal-500/15 text-teal-200 border border-teal-400/30 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
                 Founder
             </div>
 
             <div className="flex justify-between items-start mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-2xl font-black shadow-lg ring-4 ring-black text-white">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center text-2xl font-black shadow-lg ring-4 ring-black text-white">
                     T
                 </div>
             </div>
 
             <div>
-                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">Tumai</h3>
+                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-300 transition-colors">Tumai</h3>
                 <p className="text-neutral-300 text-sm leading-relaxed mb-3">
                     AI agents that automate real estate operations end-to-end—running over WhatsApp and plugged straight into your CRM. Rent collection, tenant comms, property evaluation and reporting, on autopilot.
                 </p>
@@ -283,7 +283,7 @@ function TumaiCard() {
                     <span className="text-neutral-700">·</span>
                     <span><span className="text-white">US</span> & <span className="text-white">Spain</span></span>
                     <span className="text-neutral-700">·</span>
-                    <span className="text-violet-300">In production</span>
+                    <span className="text-teal-300">In production</span>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-3">
@@ -296,20 +296,13 @@ function TumaiCard() {
 
                 <div className="flex flex-wrap gap-2">
                     <a
-                        href="https://tumai.tech"
+                        href="https://tumai.tech/"
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="px-3 py-1 rounded-full bg-white text-black text-[11px] font-medium hover:bg-neutral-200 transition-colors flex items-center gap-1"
                     >
                         <ArrowUpRight size={12} />
                         <span>tumai.tech</span>
-                    </a>
-                    <a
-                        href="https://github.com/mariasebarespersona/Tum-AI"
-                        target="_blank"
-                        className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-200 hover:bg-white/10 transition-colors flex items-center gap-1"
-                    >
-                        <Github size={12} />
-                        <span>Platform</span>
                     </a>
                 </div>
             </div>
@@ -354,14 +347,14 @@ function ContactCard() {
 
     return (
         <Card
-            className="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-600 to-blue-500 border-none !p-0 overflow-hidden group relative"
+            className="col-span-1 md:col-span-2 bg-gradient-to-r from-teal-600 to-cyan-600 border-none !p-0 overflow-hidden group relative"
         >
             <div className="h-full w-full p-6 md:p-8 flex items-center justify-between relative z-10 gap-4">
                 <div className="min-w-0">
                     <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">
                         {copied ? "Email Copied!" : "Let's work together"}
                     </h3>
-                    <p className="text-blue-100 text-sm">
+                    <p className="text-teal-50 text-sm">
                         {copied ? "mariasebares9@gmail.com" : "Taking on new client projects this quarter."}
                     </p>
                 </div>
@@ -371,7 +364,7 @@ function ContactCard() {
                         href="https://cal.com/"
                         target="_blank"
                         onClick={(e) => e.stopPropagation()}
-                        className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full bg-white text-blue-600 text-xs font-bold hover:bg-blue-50 transition-colors shadow-lg"
+                        className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full bg-white text-teal-700 text-xs font-bold hover:bg-teal-50 transition-colors shadow-lg"
                     >
                         <Calendar size={14} />
                         <span>Book a 15 min</span>
@@ -382,9 +375,9 @@ function ContactCard() {
                         className="w-11 h-11 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl cursor-pointer"
                     >
                         {copied ? (
-                             <div className="text-blue-600 font-bold text-xl">✓</div>
+                             <div className="text-teal-700 font-bold text-xl">✓</div>
                         ) : (
-                            <Mail className="text-blue-600 w-5 h-5" />
+                            <Mail className="text-teal-700 w-5 h-5" />
                         )}
                     </button>
                 </div>
@@ -438,7 +431,7 @@ const BentoGrid = () => {
                 <ProjectCard
                     title="RoomieScore"
                     desc="AI roommate compatibility analyzer. 1st place at the Cursor Hackathon."
-                    color="bg-purple-500"
+                    color="bg-cyan-600"
                     tags={["React", "AI", "Vercel"]}
                     badge="1st • Cursor"
                     link="https://roomiescore.vercel.app/dashboard"
@@ -451,7 +444,7 @@ const BentoGrid = () => {
                 <ProjectCard
                     title="Neuro Ad Analyzer"
                     desc="AI-driven marketing analysis combining neuroscience and ML."
-                    color="bg-indigo-500"
+                    color="bg-sky-600"
                     tags={["AI", "Analytics"]}
                     link="https://neuro-retail-pro.vercel.app/"
                     icon={<Brain size={24} className="text-white" />}
