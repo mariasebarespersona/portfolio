@@ -110,17 +110,14 @@ function MemojiCard() {
 
     return (
         <div className="h-full">
-            <Card className="h-full group relative bg-[#161310]" noPadding>
+            <Card className="h-full group relative bg-[#f4eee0]" noPadding>
             <div
                 ref={containerRef}
                 onMouseMove={handleMouseMove}
                 className="absolute inset-0 flex items-center justify-center cursor-crosshair"
             >
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#161310] z-0" />
-            {/* Soft vignette so the dark portrait reads as an intentional design element */}
-            <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: "radial-gradient(120% 90% at 50% 38%, transparent 45%, rgba(0,0,0,0.45) 100%)" }} />
-            <div className="absolute inset-0 z-20 pointer-events-none rounded-3xl ring-1 ring-inset ring-[#9a7a4c]/15" />
-            
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#f4eee0] z-0" />
+
             <div className="relative w-full h-full pointer-events-none flex items-center justify-center pb-12">
                 {isTouch ? (
                     // Touch devices have no mouse to scrub — show a clean, static portrait
@@ -128,24 +125,23 @@ function MemojiCard() {
                     <img
                         src="/avatar-poster.jpg"
                         alt="MarIA"
-                        className="max-h-full max-w-full object-contain drop-shadow-2xl"
+                        className="max-h-full max-w-full object-contain"
                     />
                 ) : (
                     <video
                         ref={videoRef}
                         poster="/avatar-poster.jpg"
                         muted playsInline preload="auto"
-                        className="max-h-full max-w-full object-contain drop-shadow-2xl"
+                        className="max-h-full max-w-full object-contain"
                         onLoadedMetadata={(e) => e.currentTarget.pause()}
                     >
                         <source src="/avatar.mp4" type="video/mp4" />
-                        <source src="/avatar.mov" type="video/quicktime" />
                     </video>
                 )}
             </div>
 
             <div className="absolute bottom-6 left-6 z-20">
-                <h1 className="text-2xl font-bold text-[#efe6d4] tracking-tight mb-1">MarIA</h1>
+                <h1 className="text-2xl font-bold text-[#26211b] tracking-tight mb-1">MarIA</h1>
                 <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-full bg-transparent border border-[#9a7a4c]/40 text-[10px] text-[#9a7a4c] uppercase tracking-[0.18em] backdrop-blur-md">
                         Founder · Tumai
