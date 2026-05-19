@@ -105,11 +105,11 @@ export default function ResumePage() {
                     <h3 className="font-bold text-base">Real Estate AI Agent (Tumai)</h3>
                     <span className="text-sm font-medium">Jan 2024 – Present</span>
                 </div>
-                <div className="text-sm text-neutral-600 mb-2 font-medium">Agentic Document Assistant</div>
+                <div className="text-sm text-neutral-600 mb-2 font-medium">Founder · AI Agents for Real Estate Operations</div>
                 <ul className="list-disc list-outside ml-4 text-sm text-neutral-800 space-y-1.5">
-                    <li>Designed an AI assistant to help real estate professionals manage documents via natural language chat.</li>
-                    <li>Enabled functionality for uploading, retrieving, and emailing documents by integrating backend actions with LLMs.</li>
-                    <li>Built with <strong>Python, OpenAI Agents SDK, PostgreSQL, and React</strong>, utilizing embeddings for intelligent file handling.</li>
+                    <li>Building AI agents that automate end-to-end real estate operations—rent collection, tenant communications, property evaluation, and reporting—running over WhatsApp and connected directly to clients&apos; CRMs.</li>
+                    <li>Shipped pre-built, production-tested automation modules customized to each client&apos;s business rules, with paying customers live in production across the <strong>US and Spain</strong>.</li>
+                    <li>Built with <strong>Python, OpenAI Agents SDK, PostgreSQL, and React</strong>, leveraging RAG and embeddings for intelligent document and workflow handling.</li>
                 </ul>
             </div>
         </section>

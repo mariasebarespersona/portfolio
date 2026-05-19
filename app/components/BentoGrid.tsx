@@ -128,7 +128,7 @@ function IntroCard() {
                 Founder building <span className="text-blue-400">Agentic AI</span> for clients across the US & Spain.
             </h2>
             <p className="text-neutral-400 mb-4 leading-relaxed">
-                Founder of <span className="text-neutral-200 font-medium">Tumai</span>, an AI consultancy shipping production-grade Agentic systems to clients in the <span className="text-neutral-200 font-medium">US and Spain</span>. Ex-IBM AI Engineer with a <span className="text-neutral-200 font-medium">Neuroscience background</span>—I architect autonomous AI that moves beyond demos into real-world impact.
+                Founder of <span className="text-neutral-200 font-medium">Tumai</span>, where I build <span className="text-neutral-200 font-medium">AI agents that automate real estate operations</span> over WhatsApp, connected directly to clients&apos; CRMs—with paying customers in production in the <span className="text-neutral-200 font-medium">US and Spain</span>. Ex-IBM AI Engineer with a <span className="text-neutral-200 font-medium">Neuroscience background</span>—I architect autonomous AI that moves beyond demos into real-world impact.
             </p>
             <div className="flex gap-4 text-neutral-500 text-sm">
                 <span className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
@@ -272,21 +272,20 @@ function TumaiCard() {
 
             <div>
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">Tumai</h3>
-                <p className="text-neutral-300 text-sm leading-relaxed mb-3 line-clamp-2">
-                    Agentic AI that doesn&apos;t break in production. Built for teams that need real systems, not demos.
+                <p className="text-neutral-300 text-sm leading-relaxed mb-3 line-clamp-3">
+                    AI agents that automate real estate operations end-to-end—running over WhatsApp and plugged straight into your CRM. Rent collection, tenant comms, property evaluation and reporting, on autopilot.
                 </p>
 
-                {/* TODO: replace with real metrics once public (e.g. "8 clients", "$XXk ARR") */}
                 <div className="flex items-center gap-3 text-[10px] text-neutral-400 uppercase tracking-wider font-semibold mb-3 border-y border-white/5 py-2">
-                    <span><span className="text-white">2</span> Countries</span>
+                    <span><span className="text-white">Live</span> clients</span>
                     <span className="text-neutral-700">·</span>
-                    <span><span className="text-white">US</span> & <span className="text-white">ES</span></span>
+                    <span><span className="text-white">US</span> & <span className="text-white">Spain</span></span>
                     <span className="text-neutral-700">·</span>
-                    <span className="text-violet-300">Production-grade</span>
+                    <span className="text-violet-300">In production</span>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-3">
-                    {["Agentic AI", "RAG", "LangGraph", "DSPy"].map(tag => (
+                    {["Real Estate AI", "WhatsApp Agents", "CRM Automation", "RAG"].map(tag => (
                         <span key={tag} className="px-2 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] text-neutral-200 font-medium uppercase tracking-wider">
                             {tag}
                         </span>
@@ -295,12 +294,12 @@ function TumaiCard() {
 
                 <div className="flex flex-wrap gap-2">
                     <a
-                        href="https://tumai.us"
+                        href="https://tumai.tech"
                         target="_blank"
                         className="px-3 py-1 rounded-full bg-white text-black text-[11px] font-medium hover:bg-neutral-200 transition-colors flex items-center gap-1"
                     >
                         <ArrowUpRight size={12} />
-                        <span>tumai.us</span>
+                        <span>tumai.tech</span>
                     </a>
                     <a
                         href="https://github.com/mariasebarespersona/Tum-AI"
@@ -318,7 +317,7 @@ function TumaiCard() {
 
 function StackCard() {
     const stack = [
-        { name: "Agentic AI (LangGraph, DSPy)", icon: <Brain size={14} /> },
+        { name: "Agentic AI & Orchestration", icon: <Brain size={14} /> },
         { name: "LLMs (Claude, GPT-4, Gemini)", icon: <Zap size={14} /> },
         { name: "RAG & Vector DBs (pgvector)", icon: <Zap size={14} /> },
         { name: "TypeScript & Python", icon: <Code size={14} /> },

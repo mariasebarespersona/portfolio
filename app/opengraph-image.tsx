@@ -81,8 +81,8 @@ export default function OpengraphImage() {
             color: "#737373",
           }}
         >
-          <span>tumai.us</span>
-          <span>LangGraph · DSPy · RAG · Production</span>
+          <span>tumai.tech</span>
+          <span>Real Estate AI · WhatsApp Agents · CRM Automation</span>
         </div>
       </div>
     ),
