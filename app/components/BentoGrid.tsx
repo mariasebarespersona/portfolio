@@ -68,7 +68,6 @@ function Card({ children, className = "", spotlight = true, noPadding = false, o
 
 function MemojiCard() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   // Touch devices have no mousemove to scrub the avatar, so show a static portrait.
   const [isTouch, setIsTouch] = useState(false);
 
@@ -82,14 +81,24 @@ function MemojiCard() {
 
   React.useEffect(() => {
     if (isTouch) return;
+    // Follow the cursor across the whole page: sweeping left→right scrubs the
+    // entire look-around clip (up, side, down, smile) so every pose is reachable.
+    const onMove = (e: PointerEvent) => {
+      targetRef.current = Math.max(0, Math.min(1, e.clientX / window.innerWidth));
+    };
+    window.addEventListener("pointermove", onMove);
+
     let raf = 0;
     const tick = () => {
       const v = videoRef.current;
       if (v && isFinite(v.duration) && v.duration > 0) {
         // Ease current toward target for a smooth, fluid follow.
-        currentRef.current += (targetRef.current - currentRef.current) * 0.18;
+        currentRef.current += (targetRef.current - currentRef.current) * 0.16;
+        if (Math.abs(targetRef.current - currentRef.current) < 0.0015) {
+          currentRef.current = targetRef.current; // snap so extremes are exact
+        }
         const t = currentRef.current * v.duration;
-        if (Math.abs(t - v.currentTime) > 0.004) {
+        if (Math.abs(t - v.currentTime) > 0.002) {
           if (typeof v.fastSeek === "function") v.fastSeek(t);
           else v.currentTime = t;
         }
@@ -97,25 +106,16 @@ function MemojiCard() {
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      cancelAnimationFrame(raf);
+    };
   }, [isTouch]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isTouch || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    // Map cursor left→right to the avatar turning to follow it.
-    targetRef.current = Math.max(0, Math.min(1, 1 - x));
-  };
 
     return (
         <div className="h-full">
             <Card className="h-full group relative bg-[#f4eee0]" noPadding>
-            <div
-                ref={containerRef}
-                onMouseMove={handleMouseMove}
-                className="absolute inset-0 flex items-center justify-center cursor-crosshair"
-            >
+            <div className="absolute inset-0 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#f4eee0] z-0" />
 
             <div className="relative w-full h-full pointer-events-none flex items-center justify-center pb-12">
