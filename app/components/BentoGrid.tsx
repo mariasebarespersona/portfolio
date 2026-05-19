@@ -100,20 +100,27 @@ function MemojiCard() {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#ebe3d2] z-0" />
             
             <div className="relative w-full h-full pointer-events-none flex items-center justify-center pb-12">
-                <video
-                    ref={videoRef}
-                    key={isTouch ? "touch" : "hover"}
-                    poster="/avatar-poster.jpg"
-                    muted playsInline preload="auto"
-                    autoPlay={isTouch}
-                    loop={isTouch}
-                    className="max-h-full max-w-full object-contain drop-shadow-2xl"
-                    onLoadedMetadata={(e) => { if (!isTouch) e.currentTarget.pause(); }}
-                >
-                    <source src="/avatar.webm" type="video/webm" />
-                    <source src="/avatar.mp4" type="video/mp4" />
-                    <source src="/avatar.mov" type="video/quicktime" />
-                </video>
+                {isTouch ? (
+                    // Touch devices have no mouse to scrub — show a clean, static portrait
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                        src="/avatar-poster.jpg"
+                        alt="MarIA"
+                        className="max-h-full max-w-full object-contain drop-shadow-2xl"
+                    />
+                ) : (
+                    <video
+                        ref={videoRef}
+                        poster="/avatar-poster.jpg"
+                        muted playsInline preload="auto"
+                        className="max-h-full max-w-full object-contain drop-shadow-2xl"
+                        onLoadedMetadata={(e) => e.currentTarget.pause()}
+                    >
+                        <source src="/avatar.webm" type="video/webm" />
+                        <source src="/avatar.mp4" type="video/mp4" />
+                        <source src="/avatar.mov" type="video/quicktime" />
+                    </video>
+                )}
             </div>
 
             <div className="absolute bottom-6 left-6 z-20">
@@ -358,7 +365,7 @@ function ContactCard() {
 
     return (
         <Card
-            className="col-span-1 md:col-span-2 border-none !p-0 overflow-hidden group relative"
+            className="col-span-1 col-span-2 border-none !p-0 overflow-hidden group relative"
         >
             <div className="absolute inset-0 bg-[#161310] z-0" />
             <div className="h-full w-full p-6 md:p-8 flex items-center justify-between relative z-10 gap-4">
@@ -399,47 +406,97 @@ function ContactCard() {
     );
 }
 
+// --- FIT-TO-VIEWPORT ---
+// Scales the whole layout so everything is visible on one screen
+// (desktop and mobile) with no scrolling and nothing cut off.
+function FitToViewport({ children }: { children: React.ReactNode }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const [scale, setScale] = useState(0);
+
+    React.useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const compute = () => {
+            const cw = el.scrollWidth;
+            const ch = el.scrollHeight;
+            if (!cw || !ch) return;
+            const vw = window.innerWidth;
+            const vh = window.visualViewport?.height ?? window.innerHeight;
+            const pad = 24;
+            setScale(Math.min((vw - pad) / cw, (vh - pad) / ch, 1));
+        };
+        compute();
+        const ro = new ResizeObserver(compute);
+        ro.observe(el);
+        window.addEventListener("resize", compute);
+        window.visualViewport?.addEventListener("resize", compute);
+        return () => {
+            ro.disconnect();
+            window.removeEventListener("resize", compute);
+            window.visualViewport?.removeEventListener("resize", compute);
+        };
+    }, []);
+
+    return (
+        <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
+            <div
+                ref={ref}
+                style={{
+                    width: 1080,
+                    transform: `scale(${scale || 1})`,
+                    transformOrigin: "center center",
+                    opacity: scale ? 1 : 0,
+                    transition: "opacity 0.2s ease",
+                }}
+            >
+                {children}
+            </div>
+        </div>
+    );
+}
+
 // --- MAIN BENTO GRID ---
 
 const BentoGrid = () => {
   return (
-    <div className="min-h-screen w-full bg-[#f0e9da] text-[#26211b] p-4 md:p-6 flex items-start justify-center relative overflow-x-hidden">
-        
+    <div className="fixed inset-0 bg-[#f0e9da] text-[#26211b] overflow-hidden">
+
         {/* Background Noise */}
         <div className="fixed inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
-        
+
+        <FitToViewport>
         <motion.div
-            className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-4 auto-rows-[minmax(0,auto)] gap-3"
+            className="w-full grid grid-cols-4 auto-rows-[minmax(0,auto)] gap-3"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
         >
 
             {/* ROW 1 — Intro (2) + Resume (1) + Socials (1) */}
-            <div className="md:col-span-2 md:row-span-1">
+            <div className="col-span-2 row-span-1">
                 <IntroCard />
             </div>
 
-            <div className="md:col-span-1 md:row-span-1">
+            <div className="col-span-1 row-span-1">
                 <ResumeCard className="h-full" />
             </div>
 
-            <div className="md:col-span-1 md:row-span-1">
+            <div className="col-span-1 row-span-1">
                 <SocialsCard className="h-full" />
             </div>
 
             {/* ROW 2 — Tumai (1) + MarIA centerpiece (2) + RoomieScore (1) */}
-            <div className="md:col-span-1 md:row-span-1">
+            <div className="col-span-1 row-span-1">
                 <TumaiCard />
             </div>
 
             {/* MarIA - featured centerpiece, mouse-scrub avatar */}
-            <div className="aspect-[4/5] md:aspect-auto md:h-full md:col-span-2 md:row-span-1">
+            <div className="h-full col-span-2 row-span-1">
                  <MemojiCard />
             </div>
 
             {/* RoomieScore - spans 1 col, with prominent winner badge */}
-            <div className="md:col-span-1 md:row-span-1">
+            <div className="col-span-1 row-span-1">
                 <ProjectCard
                     title="RoomieScore"
                     desc="AI roommate compatibility analyzer. 1st place at the Cursor Hackathon."
@@ -450,7 +507,7 @@ const BentoGrid = () => {
             </div>
 
             {/* ROW 3 — Neuro (1) + Stack (1) + REDAE (2) */}
-            <div className="md:col-span-1 md:row-span-1">
+            <div className="col-span-1 row-span-1">
                 <ProjectCard
                     title="Neuro Ad Analyzer"
                     desc="AI-driven marketing analysis combining neuroscience and ML."
@@ -461,12 +518,12 @@ const BentoGrid = () => {
             </div>
 
             {/* Stack */}
-            <div className="md:col-span-1 md:row-span-1">
+            <div className="col-span-1 row-span-1">
                  <StackCard />
             </div>
 
             {/* REDAE Capital - client website design, spans 2 cols */}
-            <div className="md:col-span-2 md:row-span-1">
+            <div className="col-span-2 row-span-1">
                 <ProjectCard
                     title="REDAE Capital"
                     desc="Designed and built the corporate website for REDAE Capital, a private equity and real estate firm connecting investors between Latin America and Europe across luxury hospitality and residential developments in Spain."
@@ -478,11 +535,12 @@ const BentoGrid = () => {
             </div>
 
             {/* Contact - full width */}
-            <div className="md:col-span-4 md:row-span-1">
+            <div className="col-span-4 row-span-1">
                  <ContactCard />
             </div>
 
         </motion.div>
+        </FitToViewport>
     </div>
   );
 };
