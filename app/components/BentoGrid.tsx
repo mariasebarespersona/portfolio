@@ -69,24 +69,43 @@ function Card({ children, className = "", spotlight = true, noPadding = false, o
 function MemojiCard() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  // Touch devices have no mousemove to scrub the avatar, so autoplay it instead.
+  // Touch devices have no mousemove to scrub the avatar, so show a static portrait.
   const [isTouch, setIsTouch] = useState(false);
+
+  // Target playback position (0..1) driven by the cursor; eased toward in a rAF loop.
+  const targetRef = useRef(0.5);
+  const currentRef = useRef(0.5);
 
   React.useEffect(() => {
     setIsTouch(window.matchMedia("(hover: none)").matches);
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isTouch || !containerRef.current || !videoRef.current) return;
-    const { width } = containerRef.current.getBoundingClientRect();
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(1, x / width));
-    const invertedPercentage = 1 - percentage;
+  React.useEffect(() => {
+    if (isTouch) return;
+    let raf = 0;
+    const tick = () => {
+      const v = videoRef.current;
+      if (v && isFinite(v.duration) && v.duration > 0) {
+        // Ease current toward target for a smooth, fluid follow.
+        currentRef.current += (targetRef.current - currentRef.current) * 0.18;
+        const t = currentRef.current * v.duration;
+        if (Math.abs(t - v.currentTime) > 0.004) {
+          if (typeof v.fastSeek === "function") v.fastSeek(t);
+          else v.currentTime = t;
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [isTouch]);
 
-    if (isFinite(videoRef.current.duration)) {
-        videoRef.current.currentTime = invertedPercentage * videoRef.current.duration;
-    }
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isTouch || !containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    // Map cursor left→right to the avatar turning to follow it.
+    targetRef.current = Math.max(0, Math.min(1, 1 - x));
   };
 
     return (
@@ -116,7 +135,6 @@ function MemojiCard() {
                         className="max-h-full max-w-full object-contain drop-shadow-2xl"
                         onLoadedMetadata={(e) => e.currentTarget.pause()}
                     >
-                        <source src="/avatar.webm" type="video/webm" />
                         <source src="/avatar.mp4" type="video/mp4" />
                         <source src="/avatar.mov" type="video/quicktime" />
                     </video>
@@ -442,7 +460,7 @@ const BentoGrid = () => {
             </div>
 
             {/* MarIA - featured centerpiece, mouse-scrub avatar */}
-            <div className="aspect-[4/5] md:aspect-auto md:h-full md:col-span-2 row-span-1">
+            <div className="h-44 sm:h-52 md:h-full md:col-span-2 row-span-1">
                  <MemojiCard />
             </div>
 
