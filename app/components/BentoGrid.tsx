@@ -141,7 +141,7 @@ function IntroCard() {
                 Founder building <span className="italic text-[#9a7a4c]">Agentic AI</span> for clients across the US &amp; Spain.
             </h2>
             <p className="text-[#6f6657] mb-4 leading-relaxed">
-                Founder of <span className="text-[#26211b] font-medium">Tumai</span>, where I build <span className="text-[#26211b] font-medium">AI agents that automate real estate operations</span> over WhatsApp, connected directly to clients&apos; CRMs—with paying customers in production in the <span className="text-[#26211b] font-medium">US and Spain</span>. <span className="text-[#26211b] font-bold">Ex-IBM AI Engineer</span> with a <span className="text-[#26211b] font-medium">Neuroscience background</span>—I architect autonomous AI that moves beyond demos into real-world impact.
+                Founder of <span className="text-[#26211b] font-medium">Tumai</span>, where I build <span className="text-[#26211b] font-medium">AI agents that automate real estate operations</span> over WhatsApp, connected directly to clients&apos; CRMs—with paying customers in production in the <span className="text-[#26211b] font-medium">US and Spain</span>. <span className="text-[#26211b] font-medium">Ex-IBM AI Engineer</span> with a <span className="text-[#26211b] font-medium">Neuroscience background</span>—I architect autonomous AI that moves beyond demos into real-world impact.
             </p>
             <div className="flex gap-4 text-[#6f6657] text-sm">
                 <span className="flex items-center gap-1 hover:text-[#9a7a4c] transition-colors cursor-pointer">
@@ -358,8 +358,9 @@ function ContactCard() {
 
     return (
         <Card
-            className="col-span-1 md:col-span-2 bg-[#161310] border-none !p-0 overflow-hidden group relative"
+            className="col-span-1 md:col-span-2 border-none !p-0 overflow-hidden group relative"
         >
+            <div className="absolute inset-0 bg-[#161310] z-0" />
             <div className="h-full w-full p-6 md:p-8 flex items-center justify-between relative z-10 gap-4">
                 <div className="min-w-0">
                     <h3 className="text-3xl md:text-4xl font-normal text-[#efe6d4] mb-1">
@@ -414,27 +415,27 @@ const BentoGrid = () => {
             animate="visible"
         >
 
-            {/* ROW 1 */}
-            {/* Memoji - spans 2 rows vertically on desktop */}
-            <div className="aspect-[4/5] md:aspect-auto md:h-full md:col-span-1 md:row-span-2">
-                 <MemojiCard />
-            </div>
-
-            {/* Intro - spans 2 cols, 1 row */}
+            {/* ROW 1 — Intro (2) + Resume (1) + Socials (1) */}
             <div className="md:col-span-2 md:row-span-1">
                 <IntroCard />
             </div>
 
-            {/* Stacked Resume & Socials - spans 1 col, 1 row */}
-            <div className="md:col-span-1 md:row-span-1 flex flex-col gap-3">
-                <ResumeCard className="flex-1" />
-                <SocialsCard className="flex-1" />
+            <div className="md:col-span-1 md:row-span-1">
+                <ResumeCard className="h-full" />
             </div>
 
-            {/* ROW 2 */}
-            {/* Tumai - featured, spans 2 cols */}
-            <div className="md:col-span-2 md:row-span-1">
+            <div className="md:col-span-1 md:row-span-1">
+                <SocialsCard className="h-full" />
+            </div>
+
+            {/* ROW 2 — Tumai (1) + MarIA centerpiece (2) + RoomieScore (1) */}
+            <div className="md:col-span-1 md:row-span-1">
                 <TumaiCard />
+            </div>
+
+            {/* MarIA - featured centerpiece, mouse-scrub avatar */}
+            <div className="aspect-[4/5] md:aspect-auto md:h-full md:col-span-2 md:row-span-1">
+                 <MemojiCard />
             </div>
 
             {/* RoomieScore - spans 1 col, with prominent winner badge */}
@@ -448,8 +449,7 @@ const BentoGrid = () => {
                 />
             </div>
 
-            {/* ROW 3 */}
-            {/* Neuro Ad Analyzer */}
+            {/* ROW 3 — Neuro (1) + Stack (1) + REDAE (2) */}
             <div className="md:col-span-1 md:row-span-1">
                 <ProjectCard
                     title="Neuro Ad Analyzer"
