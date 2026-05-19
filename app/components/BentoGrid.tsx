@@ -152,7 +152,7 @@ function MemojiCard() {
             </div>
 
             <div className="absolute bottom-6 left-6 z-20">
-                <h1 className="text-2xl font-bold text-[#26211b] tracking-tight mb-1">MarIA</h1>
+                <h2 className="text-2xl font-bold text-[#26211b] tracking-tight mb-1">MarIA</h2>
                 <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-full bg-transparent border border-[#9a7a4c]/40 text-[10px] text-[#9a7a4c] uppercase tracking-[0.18em] backdrop-blur-md">
                         Founder · Tumai
@@ -444,8 +444,15 @@ const BentoGrid = () => {
         {/* Background Noise */}
         <div className="fixed inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
 
+        <div className="w-full max-w-[1400px] flex flex-col gap-3 md:gap-4">
+
+        <header className="flex items-baseline justify-between gap-4 px-1.5">
+            <h1 className="text-xl md:text-2xl font-normal tracking-tight text-[#26211b]">María Sebares</h1>
+            <span className="text-[9px] md:text-[11px] text-[#9a7a4c] uppercase tracking-[0.22em] font-medium text-right shrink-0">AI Engineer · Founder of Tumai</span>
+        </header>
+
         <motion.div
-            className="w-full max-w-[1400px] grid grid-cols-1 md:grid-cols-4 auto-rows-[minmax(0,auto)] gap-2.5 md:gap-3"
+            className="w-full grid grid-cols-1 md:grid-cols-4 auto-rows-[minmax(0,auto)] gap-2.5 md:gap-3"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -519,6 +526,7 @@ const BentoGrid = () => {
             </div>
 
         </motion.div>
+        </div>
     </div>
   );
 };
