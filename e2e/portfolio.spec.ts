@@ -1,74 +1,85 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Homepage", () => {
+// The home canvas renders both a desktop (scattered) and a mobile (stacked)
+// layout in the DOM, toggled by CSS. ":visible" targets whichever the current
+// viewport actually shows, so these specs pass on desktop AND mobile projects.
+
+test.describe("Homepage canvas", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });
 
-  test("loads and displays the bento grid", async ({ page }) => {
+  test("loads with name and tagline", async ({ page }) => {
     await expect(page).toHaveTitle(/MarIA/);
-    await expect(page.getByText("MarIA")).toBeVisible();
     await expect(
-      page.getByText("AI Engineer & Data Scientist", { exact: true })
+      page.getByRole("heading", { name: "María Sebares" })
+    ).toBeVisible();
+    await expect(
+      page.getByText("AI Engineer · Founder of Tumai")
     ).toBeVisible();
   });
 
-  test("displays the intro card with bio", async ({ page }) => {
-    await expect(page.getByText("Available for work")).toBeVisible();
-    await expect(
-      page.getByText("Agentic AI", { exact: true })
-    ).toBeVisible();
-    await expect(page.getByText("Ex-IBM Engineer")).toBeVisible();
+  test("shows the intro window", async ({ page }) => {
+    const intro = page.locator('[data-testid="window-intro"]:visible');
+    await expect(intro).toBeVisible();
+    await expect(intro.getByText("Open for client projects")).toBeVisible();
+    await expect(intro.getByText("Agentic AI")).toBeVisible();
   });
 
-  test("displays location and languages", async ({ page }) => {
-    await expect(page.getByText("London, UK")).toBeVisible();
-    await expect(page.getByText("English, Spanish & French")).toBeVisible();
+  test("shows all project windows", async ({ page }) => {
+    for (const id of ["tumai", "roomiescore", "neuro", "redae-capital"]) {
+      await expect(
+        page.locator(`[data-testid="window-${id}"]:visible`)
+      ).toBeVisible();
+    }
   });
 
-  test("displays project cards", async ({ page }) => {
-    await expect(page.getByText("RoomieScore")).toBeVisible();
-    await expect(page.getByText("Neuro Ad Analyzer")).toBeVisible();
+  test("clicking a project window opens its detail page and back returns", async ({
+    page,
+  }) => {
+    await page.locator('[data-testid="window-tumai"]:visible').click();
+    await expect(page).toHaveURL("/work/tumai");
+    await expect(page.getByRole("heading", { name: "Tumai" })).toBeVisible();
+
+    await page.getByRole("link", { name: /Back to portfolio/i }).first().click();
+    await expect(page).toHaveURL("/");
   });
 
-  test("RoomieScore shows hackathon badge", async ({ page }) => {
-    await expect(page.getByText("1st Place")).toBeVisible();
-  });
-
-  test("displays tech stack", async ({ page }) => {
-    await expect(page.getByText("Tech Stack")).toBeVisible();
-    await expect(page.getByText("Agentic AI (LangGraph/DSPy)")).toBeVisible();
-    await expect(page.getByText("RAG & Vector DBs")).toBeVisible();
-    await expect(page.getByText("AWS & Cloud Architecture")).toBeVisible();
-    await expect(page.getByText("Python & FastAPI")).toBeVisible();
-    await expect(page.getByText("React & Next.js")).toBeVisible();
-  });
-
-  test("displays contact section", async ({ page }) => {
+  test("contact CTA is present", async ({ page }) => {
     await expect(page.getByText("Let's work together")).toBeVisible();
-    await expect(
-      page.getByText("I'm currently open to new opportunities.")
-    ).toBeVisible();
   });
 
-  test("project links have correct hrefs", async ({ page }) => {
-    const roomieLink = page.getByRole("link", { name: "Open app" }).first();
-    await expect(roomieLink).toHaveAttribute("href", /roomiescore/);
-    await expect(roomieLink).toHaveAttribute("target", "_blank");
-  });
-
-  test("LinkedIn link points to correct profile", async ({ page }) => {
-    const linkedinLink = page.getByRole("link", { name: /LinkedIn/ });
-    await expect(linkedinLink).toHaveAttribute(
+  test("top-bar links: LinkedIn and Resume", async ({ page }) => {
+    await expect(page.getByRole("link", { name: /LinkedIn/i })).toHaveAttribute(
       "href",
       "https://www.linkedin.com/in/maria-sebares9"
     );
-    await expect(linkedinLink).toHaveAttribute("target", "_blank");
+    await expect(
+      page.getByRole("link", { name: /Resume/i })
+    ).toHaveAttribute("href", "/resume");
+  });
+});
+
+test.describe("Project detail pages", () => {
+  test("renders a project with summary, external link and back nav", async ({
+    page,
+  }) => {
+    await page.goto("/work/roomiescore");
+    await expect(
+      page.getByRole("heading", { name: "RoomieScore" })
+    ).toBeVisible();
+
+    const openApp = page.getByRole("link", { name: /Open app/i });
+    await expect(openApp).toHaveAttribute("href", /roomiescore/);
+    await expect(openApp).toHaveAttribute("target", "_blank");
+
+    await page.getByRole("link", { name: /Back to portfolio/i }).first().click();
+    await expect(page).toHaveURL("/");
   });
 
-  test("Resume link navigates to /resume", async ({ page }) => {
-    const resumeLink = page.getByRole("link", { name: /Resume/ });
-    await expect(resumeLink).toHaveAttribute("href", "/resume");
+  test("unknown project returns 404", async ({ page }) => {
+    const res = await page.goto("/work/does-not-exist");
+    expect(res?.status()).toBe(404);
   });
 });
 
@@ -88,12 +99,6 @@ test.describe("Resume Page", () => {
     await expect(page.getByText("IBM | London, UK")).toBeVisible();
   });
 
-  test("displays skills section", async ({ page }) => {
-    await expect(
-      page.getByRole("heading", { name: /Skills/i })
-    ).toBeVisible();
-  });
-
   test("has a back link to home", async ({ page }) => {
     const backLink = page.getByRole("link", { name: /Back to Portfolio/i });
     await expect(backLink).toBeVisible();
@@ -102,29 +107,8 @@ test.describe("Resume Page", () => {
   });
 
   test("has a download PDF button", async ({ page }) => {
-    const downloadBtn = page.getByRole("button", { name: /Download PDF/i });
-    await expect(downloadBtn).toBeVisible();
-  });
-});
-
-test.describe("Navigation", () => {
-  test("can navigate from home to resume and back", async ({ page }) => {
-    await page.goto("/");
-    await page.getByRole("link", { name: /Resume/ }).click();
-    await expect(page).toHaveURL("/resume");
-    await expect(page.getByText("Professional Summary")).toBeVisible();
-
-    await page.getByRole("link", { name: /Back to Portfolio/i }).click();
-    await expect(page).toHaveURL("/");
-    await expect(page.getByText("MarIA")).toBeVisible();
-  });
-});
-
-test.describe("Responsive Design", () => {
-  test("renders correctly on mobile viewport", async ({ page, isMobile }) => {
-    test.skip(!isMobile, "Mobile-only test");
-    await page.goto("/");
-    await expect(page.getByText("MarIA")).toBeVisible();
-    await expect(page.getByText("RoomieScore")).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /Download PDF/i })
+    ).toBeVisible();
   });
 });
