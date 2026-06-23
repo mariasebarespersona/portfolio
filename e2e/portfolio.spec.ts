@@ -27,7 +27,7 @@ test.describe("Homepage canvas", () => {
   });
 
   test("shows all project windows", async ({ page }) => {
-    for (const id of ["tumai", "roomiescore", "neuro", "redae-capital"]) {
+    for (const id of ["tumai", "roomiescore", "neuro", "redae-capital", "neuropop"]) {
       await expect(
         page.locator(`[data-testid="window-${id}"]:visible`)
       ).toBeVisible();

@@ -21,7 +21,7 @@ import Avatar from "./Avatar";
 import { projects, type Project } from "../data/projects";
 
 const STAGE_W = 1340;
-const STAGE_H = 760;
+const STAGE_H = 880;
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -151,13 +151,13 @@ type WinDef = {
 const project = (slug: string) => projects.find((p) => p.slug === slug)!;
 
 const windows: WinDef[] = [
-  { id: "intro", label: "about", width: 380, x: 0, y: 18, rotate: -1.5, body: <IntroBody /> },
+  { id: "intro", label: "about", width: 375, x: 0, y: 20, rotate: -1.5, body: <IntroBody /> },
   {
     id: "tumai",
     label: project("tumai").windowLabel,
     href: "/work/tumai",
-    width: 330,
-    x: 430,
+    width: 325,
+    x: 440,
     y: 0,
     rotate: 1.8,
     body: <ProjectBody p={project("tumai")} />,
@@ -167,8 +167,8 @@ const windows: WinDef[] = [
     label: project("roomiescore").windowLabel,
     href: "/work/roomiescore",
     width: 300,
-    x: 800,
-    y: 44,
+    x: 790,
+    y: 52,
     rotate: 3,
     body: <ProjectBody p={project("roomiescore")} />,
   },
@@ -176,27 +176,27 @@ const windows: WinDef[] = [
     id: "stack",
     label: "stack.txt",
     width: 250,
-    x: 1075,
-    y: 372,
-    rotate: 3.5,
+    x: 1095,
+    y: 60,
+    rotate: 3,
     body: <StackBody />,
   },
   {
     id: "maria",
     label: "maria.mov",
-    width: 290,
-    x: 250,
+    width: 285,
+    x: 180,
     y: 300,
-    rotate: -2,
+    rotate: -2.5,
     body: <AvatarBody />,
   },
   {
     id: "redae-capital",
     label: project("redae-capital").windowLabel,
     href: "/work/redae-capital",
-    width: 350,
-    x: 600,
-    y: 370,
+    width: 345,
+    x: 430,
+    y: 430,
     rotate: 1.2,
     body: <ProjectBody p={project("redae-capital")} />,
   },
@@ -204,11 +204,21 @@ const windows: WinDef[] = [
     id: "neuro",
     label: project("neuro-ad-analyzer").windowLabel,
     href: "/work/neuro-ad-analyzer",
-    width: 300,
-    x: 20,
-    y: 446,
+    width: 295,
+    x: 40,
+    y: 540,
     rotate: -3,
     body: <ProjectBody p={project("neuro-ad-analyzer")} />,
+  },
+  {
+    id: "neuropop",
+    label: project("neuropop").windowLabel,
+    href: "/work/neuropop",
+    width: 335,
+    x: 820,
+    y: 470,
+    rotate: -1.8,
+    body: <ProjectBody p={project("neuropop")} />,
   },
 ];
 

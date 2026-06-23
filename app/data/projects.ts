@@ -92,6 +92,28 @@ export const projects: Project[] = [
     windowLabel: "neuro-retail-pro.vercel.app",
   },
   {
+    slug: "neuropop",
+    name: "NeuroPop",
+    role: "Builder · Neuroscience × AI",
+    year: "2025",
+    oneLiner: "Interactive neuroscience you can touch — where brains and AI converge",
+    summary:
+      "An interactive neuroscience playground: complex brain phenomena that emerge from simple rules — and that AI rediscovers on its own. Each topic is an experiment you can touch, move and understand.",
+    body: [
+      "NeuroPop turns dense neuroscience into hands-on experiments. The first live module is grid cells — the brain's hexagonal 'GPS' for spatial navigation (Nobel 2014). Walk around a room and watch a hexagonal grid emerge that tells you where you are — the same structure an AI discovered on its own when trained to navigate.",
+      "It's built around a thesis I care about: the most striking ideas in the brain emerge from simple rules, and deep learning keeps rediscovering the same solutions. More modules are on the way — Hopfield memory, dopamine and reward prediction, and the Libet free-will experiment.",
+      "Grounded in my neuroscience background, and designed to make the intuition tactile rather than abstract.",
+    ],
+    tags: ["Neuroscience", "Interactive", "AI"],
+    stack: ["Next.js", "TypeScript", "Interactive viz", "Vercel"],
+    externalLink: "https://emergencia-grid-cells.vercel.app/",
+    externalLabel: "Open NeuroPop",
+    badge: "Neuroscience",
+    cover: "/work/emergent-grid-cells.jpg",
+    gallery: ["/work/emergent-grid-cells.jpg", "/work/emergent-grid-cells-2.jpg"],
+    windowLabel: "emergencia-grid-cells.vercel.app",
+  },
+  {
     slug: "redae-capital",
     name: "REDAE Capital",
     role: "Web design & build · Client work",
