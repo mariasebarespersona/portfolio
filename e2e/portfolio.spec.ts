@@ -4,6 +4,12 @@ import { test, expect } from "@playwright/test";
 // layout in the DOM, toggled by CSS. ":visible" targets whichever the current
 // viewport actually shows, so these specs pass on desktop AND mobile projects.
 
+// The canvas has continuous idle drift; reduced motion holds windows still so
+// click actionability is reliable (and exercises the reduced-motion path).
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+});
+
 test.describe("Homepage canvas", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");

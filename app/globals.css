@@ -33,3 +33,23 @@ h6 {
   font-family: var(--font-heading), Georgia, serif;
   font-weight: 400;
 }
+
+/* WOW canvas helpers */
+.no-native-cursor,
+.no-native-cursor * {
+  cursor: none;
+}
+
+/* Coherent top-left light: a long, soft directional shadow for the windows. */
+.window-shadow {
+  box-shadow:
+    14px 22px 44px -26px rgba(38, 33, 27, 0.55),
+    2px 4px 10px -6px rgba(38, 33, 27, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .no-native-cursor,
+  .no-native-cursor * {
+    cursor: auto;
+  }
+}

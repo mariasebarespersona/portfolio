@@ -25,6 +25,8 @@ export type Project = {
   gallery: string[];
   /** Label shown in the window titlebar (domain-like). */
   windowLabel: string;
+  /** Whether the live site can be embedded in an iframe preview. Default true. */
+  embeddable?: boolean;
 };
 
 export const projects: Project[] = [
