@@ -81,24 +81,6 @@ export const facts: [string, string][] = [
   ["Languages", "EN, ES, FR"],
 ];
 
-export const about = [
-  "I did my Bachelor's and Master's in Neuroscience at UCL, the four-year integrated MSci. My thesis used optogenetics to work out how a mouse decides to move: switch a circuit on with light, watch what the animal does. I came out of it convinced the interesting question is the same on both sides of my career since. How does reliable behaviour come out of simple rules.",
-
-  "Then three years at IBM as an AI Engineer, building an agentic Gen-AI assistant for a bank. I led the conversational logic: multi-turn context, input and output guardrails, and tool use for things like information extraction and authentication, on DSPy, LangGraph and the OpenAI Agents SDK, with fine-tuned small models and embeddings underneath. I shipped the production APIs it runs on, and trained the predictive models behind its spending insights. I was on it from the first proof of concept and in front of the client the whole way, through fortnightly playbacks. The account carried over £5M of contract value across five quarters.",
-
-  "Now I run Tumai. It is the operating system a modular home dealer in Texas runs their business on: the homes, the rent-to-own contracts, the collections, and the books of the private capital that funded the inventory, in one system. The hard part is never the demo. It is making an autonomous system trustworthy enough to touch real money and real personal data, and reconciling every figure it shows to the cent.",
-];
-
-/** NeuroPop gets its own block in the panel: it is the thread back to where she
- *  started, and the one place she is asking for people rather than clients. */
-export const neuropop = {
-  lead:
-    "Alongside that I build NeuroPop, which is where the neuroscience comes back.",
-  body:
-    "Each piece takes one brain condition and turns the research into something a person can actually pick up and use. Hemispace, for the spatial neglect that can follow a stroke, when half the world stops being noticed. NeuroTune, for affective aprosodia, when the music goes out of speech and emotion stops carrying. And a playable module on the hexagonal map the brain draws to know where it is. Three built so far, on their way to being a neurotech venture studio.",
-  ask:
-    "This is the part I would most like company on. If you are a clinician, a speech and language therapist, a neuropsychologist, a researcher, or someone living with one of these conditions, I want to hear from you.",
-} as const;
 
 
 export const EMAIL = "mariasebares9@gmail.com";
@@ -106,3 +88,39 @@ export const LINKEDIN = "https://www.linkedin.com/in/maria-sebares9";
 
 export const domain = (p: Project) =>
   p.externalLink ? new URL(p.externalLink).hostname.replace(/^www\./, "") : "";
+
+
+/* ---------------------------------------------------------------------------
+   The about section, restructured. A founder who is raising does not open with
+   2018: what she is doing now comes first, the path second.
+   --------------------------------------------------------------------------- */
+
+export const tracks = [
+  {
+    lane: "The company",
+    title: "Tumai",
+    status: "Raising an angel round",
+    body: "A B2B startup. The operating system a modular home dealer in Texas runs their business on: the homes, the rent-to-own contracts, the collections, and the books of the private capital that funded the inventory. Paying customers, in production.",
+    ask: "Open to angels who know vertical software, US SMB operations, or the private credit side of it.",
+  },
+  {
+    lane: "The other one",
+    title: "NeuroPop",
+    status: "Open to collaborations",
+    body: "Three built tools that take one brain condition each and turn the research into something a person can pick up and use. Spatial neglect after a stroke, affective aprosodia, and the hexagonal map the brain draws to know where it is.",
+    ask: "I want company on this: clinicians, speech and language therapists, neuropsychologists, researchers, or people living with these conditions.",
+  },
+] as const;
+
+export const path = [
+  {
+    when: "2018 to 2022",
+    what: "MSci Neuroscience, UCL",
+    body: "The four-year integrated Bachelor's and Master's. My thesis used optogenetics to work out how a mouse decides to move.",
+  },
+  {
+    when: "2022 to 2025",
+    what: "AI Engineer, IBM",
+    body: "An agentic Gen-AI assistant for a bank. I led the conversational logic: multi-turn context, input and output guardrails, tool use, on DSPy, LangGraph and the OpenAI Agents SDK. The account carried over £5M of contract value across five quarters.",
+  },
+] as const;

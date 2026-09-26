@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { major, minor, evidence, outcome, pending, domain, about, facts, neuropop, EMAIL } from "../data/content";
+import { major, minor, evidence, outcome, pending, domain, facts, tracks, path, EMAIL } from "../data/content";
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section className="mt-10 first:mt-0">
@@ -139,46 +139,92 @@ export function WorkPanel() {
   );
 }
 
+/** One track: a lane label, the thing, its live status, and who it is for. */
+function Track({ t }: { t: (typeof tracks)[number] }) {
+  return (
+    <div>
+      <span className="mono block text-[10.5px] uppercase tracking-[0.18em] text-[color:var(--on-void-2)]">
+        {t.lane}
+      </span>
+      <h3 className="mt-1 text-[20px] font-semibold tracking-[-0.02em]">{t.title}</h3>
+      <span className="mono mt-2 inline-flex items-center gap-2 rounded-full border border-[color:var(--accent)]/35 px-2.5 py-1 text-[10.5px] text-[color:var(--accent-ink)]">
+        <span className="h-[6px] w-[6px] rounded-full bg-[color:var(--accent)]" />
+        {t.status}
+      </span>
+      <p className="mt-3 text-[14px] leading-relaxed text-[color:var(--on-void-2)]">{t.body}</p>
+      <p className="mt-2.5 text-[14px] leading-relaxed">{t.ask}</p>
+    </div>
+  );
+}
+
 export function AboutPanel() {
   return (
     <>
       <h2 className="text-3xl font-semibold tracking-[-0.035em] md:text-5xl">
         Neuroscience, then AI
       </h2>
-      <div className="mt-4 space-y-4">
-        {about.map((p) => (
-          <p
-            key={p.slice(0, 18)}
-            className="max-w-[64ch] text-[16px] leading-relaxed text-[color:var(--on-void-2)]"
-          >
-            {p}
-          </p>
+      <p className="mt-3 max-w-[56ch] text-[16px] leading-relaxed text-[color:var(--on-void-2)]">
+        Founder of a B2B startup with paying customers, raising an angel round. And a
+        second thing I keep building on the side.
+      </p>
+
+      <ol className="relative mt-8 border-l border-[color:var(--screen-line)] pl-6">
+        {path.map((e) => (
+          <li key={e.when} className="relative pb-6">
+            <span className="absolute -left-[26px] top-[7px] h-2 w-2 rounded-full bg-[color:var(--screen-line)]" />
+            <span className="mono block text-[11px] text-[color:var(--on-void-2)]">{e.when}</span>
+            <span className="mt-0.5 block text-[15px] font-semibold tracking-[-0.01em]">
+              {e.what}
+            </span>
+            <p className="mt-1 max-w-[58ch] text-[13.5px] leading-relaxed text-[color:var(--on-void-2)]">
+              {e.body}
+            </p>
+          </li>
+        ))}
+      </ol>
+
+      {/* The line splits rather than the text explaining that it does. Two
+          things at once is the one thing this section kept failing to say. */}
+      <div className="pl-6">
+        <svg
+          viewBox="0 0 320 54"
+          className="h-[54px] w-full"
+          aria-hidden
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M2 0 V22 Q2 34 20 34 H300 Q318 34 318 46 V54"
+            fill="none"
+            stroke="var(--screen-line)"
+            strokeWidth="1.5"
+          />
+          <path d="M2 34 V54" fill="none" stroke="var(--accent)" strokeWidth="1.5" />
+          <path d="M318 46 V54" fill="none" stroke="var(--accent)" strokeWidth="1.5" />
+        </svg>
+      </div>
+      <p className="mono mb-5 mt-1 text-[11px] uppercase tracking-[0.2em] text-[color:var(--accent-ink)]">
+        Since 2025, both at once
+      </p>
+      <div className="grid gap-8 border-t border-[color:var(--accent)]/25 pt-7 sm:grid-cols-2 sm:gap-10">
+        {tracks.map((t) => (
+          <Track key={t.title} t={t} />
         ))}
       </div>
 
-      <Section title="NeuroPop">
-        <p className="max-w-[64ch] text-[16px] leading-relaxed">{neuropop.lead}</p>
-        <p className="mt-3 max-w-[64ch] text-[16px] leading-relaxed text-[color:var(--on-void-2)]">
-          {neuropop.body}
-        </p>
-        <p className="mt-4 max-w-[64ch] text-[16px] leading-relaxed">{neuropop.ask}</p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <a
-            href={`mailto:${EMAIL}?subject=NeuroPop`}
-            className="cta inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium transition-transform hover:scale-[1.03] active:translate-y-px"
-          >
-            Work on this with me <ArrowUpRight size={14} strokeWidth={1.5} />
-          </a>
-          <a
-            href="https://neurpop.space/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cta-ghost rounded-full px-5 py-2.5 text-[13px] font-medium transition-colors active:translate-y-px"
-          >
-            neurpop.space
-          </a>
-        </div>
-      </Section>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <a
+          href={`mailto:${EMAIL}`}
+          className="cta inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium transition-transform hover:scale-[1.03] active:translate-y-px"
+        >
+          Email me <ArrowUpRight size={14} strokeWidth={1.5} />
+        </a>
+        <a
+          href="/resume"
+          className="cta-ghost rounded-full px-5 py-2.5 text-[13px] font-medium transition-colors active:translate-y-px"
+        >
+          The full CV
+        </a>
+      </div>
 
       <Section title="On paper">
         <dl className="mono grid gap-x-10 text-[13px] sm:grid-cols-2">
@@ -192,15 +238,6 @@ export function AboutPanel() {
             </div>
           ))}
         </dl>
-      </Section>
-
-      <Section title="Résumé">
-        <a
-          href="/resume"
-          className="cta inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium transition-transform hover:scale-[1.03] active:translate-y-px"
-        >
-          The full CV <ArrowUpRight size={14} strokeWidth={1.5} />
-        </a>
       </Section>
     </>
   );
