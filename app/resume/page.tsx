@@ -10,20 +10,20 @@ export default function ResumePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#161310] py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+    <div className="min-h-screen bg-[color:var(--on-void)] py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
       
       {/* Navigation & Actions */}
       <div className="w-full max-w-4xl flex justify-between items-center mb-8 print:hidden">
         <Link 
             href="/"
-            className="flex items-center gap-2 text-[#efe6d4]/70 hover:text-[#efe6d4] transition-colors"
+            className="flex items-center gap-2 text-[color:var(--void)]/70 hover:text-[color:var(--void)] transition-colors"
         >
             <ArrowLeft size={20} />
             <span>Back to Portfolio</span>
         </Link>
         <button 
             onClick={handlePrint}
-            className="flex items-center gap-2 px-5 py-2 bg-transparent border border-[#9a7a4c]/50 text-[#efe6d4] text-xs uppercase tracking-[0.18em] hover:bg-[#9a7a4c] hover:text-[#161310] rounded-full font-medium transition-colors"
+            className="flex items-center gap-2 px-5 py-2 bg-transparent border border-[color:var(--accent)]/50 text-[color:var(--void)] text-xs uppercase tracking-[0.18em] hover:bg-[color:var(--accent)] hover:text-[color:var(--on-void)] rounded-full font-medium transition-colors"
         >
             <Download size={18} />
             <span>Download PDF</span>
@@ -41,7 +41,7 @@ export default function ResumePage() {
             <div className="flex flex-wrap gap-4 text-sm text-neutral-600">
                 <div className="flex items-center gap-1.5">
                     <MapPin size={14} />
-                    <span>London, United Kingdom</span>
+                    <span>San Francisco / Madrid</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                     <Mail size={14} />
@@ -69,7 +69,7 @@ export default function ResumePage() {
             <div className="mb-6">
                 <div className="flex justify-between items-baseline mb-1">
                     <h3 className="font-bold text-base">Consultant Data Scientist / AI Engineer</h3>
-                    <span className="text-sm font-medium">Nov 2022 – Present</span>
+                    <span className="text-sm font-medium">Nov 2022 to Nov 2025</span>
                 </div>
                 <div className="text-sm text-neutral-600 mb-2 font-medium">IBM | London, UK</div>
                 <ul className="list-disc list-outside ml-4 text-sm text-neutral-800 space-y-1.5">
@@ -103,11 +103,11 @@ export default function ResumePage() {
             <div>
                 <div className="flex justify-between items-baseline mb-1">
                     <h3 className="font-bold text-base">Real Estate AI Agent (Tumai)</h3>
-                    <span className="text-sm font-medium">Jan 2024 – Present</span>
+                    <span className="text-sm font-medium">Jan 2025 to now</span>
                 </div>
                 <div className="text-sm text-neutral-600 mb-2 font-medium">Founder · AI Agents for Real Estate Operations</div>
                 <ul className="list-disc list-outside ml-4 text-sm text-neutral-800 space-y-1.5">
-                    <li>Building AI agents that automate end-to-end real estate operations—rent collection, tenant communications, property evaluation, and reporting—running over WhatsApp and connected directly to clients&apos; CRMs.</li>
+                    <li>Building the operating system a modular home dealer in Texas runs on: the homes, the rent-to-own contracts, the collections, and the books of the private capital that funded the inventory, in one system.</li>
                     <li>Shipped pre-built, production-tested automation modules customized to each client&apos;s business rules, with paying customers live in production across the <strong>US and Spain</strong>.</li>
                     <li>Built with <strong>Python, OpenAI Agents SDK, PostgreSQL, and React</strong>, leveraging RAG and embeddings for intelligent document and workflow handling.</li>
                 </ul>
@@ -141,12 +141,12 @@ export default function ResumePage() {
                     <div>
                         <div className="font-bold text-sm">University College London (UCL)</div>
                         <div className="text-sm italic">MSci Neuroscience (Upper 2.1)</div>
-                        <div className="text-xs text-neutral-500">Sep 2018 - Jun 2022</div>
+                        <div className="text-xs text-neutral-500">Sep 2018 to Jun 2022</div>
                     </div>
                     <div>
                         <div className="font-bold text-sm">Imperial College London</div>
                         <div className="text-sm italic">Mathematics for Machine Learning</div>
-                        <div className="text-xs text-neutral-500">Jun 2021 - Aug 2021</div>
+                        <div className="text-xs text-neutral-500">Jun 2021 to Aug 2021</div>
                     </div>
                 </div>
             </section>
