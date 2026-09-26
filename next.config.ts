@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         has: [{ type: "host", value: "(www\\.)?tumai\\.us" }],
-        destination: "https://mariasebares.com/:path*",
+        destination: "https://www.mariasebares.com/:path*",
         permanent: true,
       },
     ];
