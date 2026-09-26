@@ -73,7 +73,7 @@ export default function Backdrop() {
     let gain = 0;   // brief global lift so a cascade reads as one wave
     let alive = 0;  // seconds since the first frame
     const SETTLE = 9;      // it calms over this many seconds
-    const FLOOR = 0.34;    // and never goes fully quiet y: number; ph: number }[] = []; off: number; sp: number; seed: number }[] = []; y: number; r: number; sp: number; ph: number }[] = [];
+    const FLOOR = 0.55;    // and never goes fully quiet y: number; ph: number }[] = []; off: number; sp: number; seed: number }[] = []; y: number; r: number; sp: number; ph: number }[] = [];
 
     function build() {
       // A soft, out-of-focus background gains nothing from retina resolution
@@ -154,7 +154,7 @@ export default function Backdrop() {
         const A = L.nodes[e.a], B = L.nodes[e.b];
         const act = Math.max(A.a, B.a);
         const fade = 1 - Math.min(1, e.len / 420);
-        const a = (0.018 + act * 0.16 + lift * 0.03) * fade * L.alpha * calm;
+        const a = (0.055 + act * 0.22 + lift * 0.04) * fade * L.alpha * calm;
         if (a < 0.004) return;
         const mxp = (A.x + B.x) / 2 - (B.y - A.y) * e.bow;
         const myp = (A.y + B.y) / 2 + (B.x - A.x) * e.bow;
@@ -185,7 +185,7 @@ export default function Backdrop() {
       L.nodes.forEach((n) => {
         const act = Math.min(1, n.a + lift * 0.3);
         if (act > 0.05) glow(g, n.c, n.x, n.y, (5 + act * 22) * L.soft, act * 0.22 * L.alpha * calm);
-        g.fillStyle = `rgba(${INK},${(0.16 + act * 0.7) * L.alpha * calm})`;
+        g.fillStyle = `rgba(${INK},${(0.32 + act * 0.6) * L.alpha * calm})`;
         g.beginPath(); g.arc(n.x, n.y, n.r + act * 1.4, 0, 7); g.fill();
       });
     }

@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 const b = await chromium.launch();
 const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 });
 const p = await ctx.newPage();
-await p.goto("http://localhost:3117/", { waitUntil: "networkidle" });
+await p.goto((process.env.BASE ?? "http://localhost:3118"), { waitUntil: "networkidle" });
 await p.waitForTimeout(3000);
 await p.mouse.move(360, 260);
 const fps = await p.evaluate(() => new Promise((res) => {

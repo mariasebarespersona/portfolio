@@ -6,6 +6,7 @@
 }
 
 :root {
+  --backdrop-opacity: 0.72;
   color-scheme: light;
 }
 
@@ -768,14 +769,14 @@ h6 {
     opacity: 0;
   }
   to {
-    opacity: 1;
+    opacity: var(--backdrop-opacity);
   }
 }
 
 /* The backdrop is the room, never the subject: it is pushed back and kept
    out of the middle so the face and the keys stay the brightest things. */
 .backdrop-canvas {
-  opacity: 0.34;
+  opacity: var(--backdrop-opacity);
   -webkit-mask-image: radial-gradient(
     76% 58% at 50% 46%,
     transparent 0%,
