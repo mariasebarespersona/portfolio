@@ -136,6 +136,27 @@ export const projects: Project[] = [
     gallery: ["/work/redae-capital.jpg", "/work/redae-capital-2.jpg"],
     windowLabel: "redaecapital.com",
   },
+  {
+    slug: "angel-match",
+    name: "Angel Match",
+    role: "Builder",
+    year: "2025",
+    oneLiner: "Find the angel investors that actually fit your company",
+    summary:
+      "A founder pastes their company's website, the app reads it, works out the sector and the stage, and ranks a base of verified angel investors from best fit to worst.",
+    body: [
+      "Raising is mostly a sorting problem. Most lists of investors are long and undifferentiated, so founders spend their time filtering instead of talking. Angel Match does the filtering: paste a URL, it reads the site from the server, infers sector and stage, and orders the base by fit. You review the result as cards and swipe.",
+      "The part I care about is the validator. Every credential and every figure on a card has to appear literally in the source biography, or the row is discarded. I tested it by injecting lies on purpose, including lies that happen to be true but are not in the text, and it drops them. A card that cannot back a claim says nothing rather than guessing.",
+      "It started as a tool for my own round and was then rebuilt as a product for any founder, with the parts written for my company stripped out of the data.",
+    ],
+    tags: ["Product", "Matching", "Data"],
+    stack: ["JavaScript", "Vercel Functions", "Node"],
+    externalLink: "https://angel-match.vercel.app/",
+    externalLabel: "Open the app",
+    cover: "/work/angel-match.jpg",
+    gallery: ["/work/angel-match.jpg"],
+    windowLabel: "angel-match.vercel.app",
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {

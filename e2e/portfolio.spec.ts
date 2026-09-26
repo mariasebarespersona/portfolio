@@ -56,7 +56,7 @@ test.describe("home", () => {
 });
 
 test.describe("project pages", () => {
-  for (const slug of ["tumai", "roomiescore", "neuro-ad-analyzer", "neuropop", "redae-capital"]) {
+  for (const slug of ["tumai", "roomiescore", "neuro-ad-analyzer", "neuropop", "redae-capital", "angel-match"]) {
     test(`${slug} renders and links back`, async ({ page }) => {
       await page.goto(`/work/${slug}`);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();

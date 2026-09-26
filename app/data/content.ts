@@ -14,7 +14,7 @@ export const LEAD =
 
 /** Three that carry the story, three that show range. */
 export const MAJOR = ["tumai", "madrid", "neuropop"] as const;
-export const MINOR = ["roomiescore", "neuro-ad-analyzer", "redae-capital"] as const;
+export const MINOR = ["angel-match", "roomiescore", "neuro-ad-analyzer", "redae-capital"] as const;
 export const ORDER = [...MAJOR, ...MINOR] as const;
 
 /** The Madrid investor product has no public name, URL or screenshot yet, so
@@ -49,6 +49,7 @@ export const evidence: Record<string, string> = {
   roomiescore: "1st, Cursor Hackathon",
   "neuro-ad-analyzer": "Deployed",
   "redae-capital": "Client work",
+  "angel-match": "Live",
 };
 
 /** What it achieved, which is what the panel leads with. Nothing here is a
@@ -64,6 +65,8 @@ export const outcome: Record<string, string> = {
     "Deployed and open to try. It scores a piece of creative for attention, emotional response and recall before any money goes into it.",
   "redae-capital":
     "Live at redaecapital.com. The investor-facing site of a private equity and real estate firm working between Latin America and Europe.",
+  "angel-match":
+    "Paste your company's website and it reads it, works out your sector and stage, and ranks a base of verified angel investors by fit. Every credential on a card has to appear literally in the source, or the row is dropped.",
 };
 
 /** Straight from the CV. Nothing here is rounded up or invented. */
