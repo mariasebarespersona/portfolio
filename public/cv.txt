@@ -1,6 +1,6 @@
 MARÍA SEBARES
 Data Scientist/ AI Engineer
-Spanish and British • London, United Kingdom
+Spanish and British • San Francisco / Madrid
 mariasebares9@gmail.com • 07561076885
 
 PROFESSIONAL SUMMARY
@@ -9,11 +9,11 @@ AI Engineer and Data Scientist with over 3 years of experience specialising in c
 EMPLOYMENT HISTORY
 
 Consultant Data Scientist/ AI Engineer | IBM
-London | Nov 2022 – Present
+London | Nov 2022 to Nov 2025
 • Developed an Agentic Gen-AI Virtual Assistant, significantly improving customer spending insights and driving substantial revenue growth for the company.
 • Led the development of key features related to conversational logic including: Multi-turn, context-aware, input & output guardrails, tools (information extraction, authentication, etc) - utilising cutting-edge frameworks such as AI frameworks DSPy, LangGraph and OpenAI Agents SDK for agentic-LLM work, a mix of fine-tuned small-models/classifiers, and embeddings models.
-• Developed and deployed scalable, production-ready APIs to facilitate real time interaction with systems, ensuring smooth integration – Utilising technologies such as FastAPI and Postman.
-• Have taken an active role with client communication, having been on this project since early POC stages, consistently driving discussions with both technical and non-technical stakeholders during regular meetings and fortnightly playbacks – securing total contract value of £5M+ over 5 quarters.
+• Developed and deployed scalable, production-ready APIs to facilitate real time interaction with systems, ensuring smooth integration, using technologies such as FastAPI and Postman.
+• Have taken an active role with client communication, having been on this project since early POC stages, consistently driving discussions with both technical and non-technical stakeholders during regular meetings and fortnightly playbacks, securing total contract value of £5M+ over 5 quarters.
 • Analysed transaction datasets to develop predictive models with XGBoost, SVM, and random forests, improving financial forecasting accuracy.
 • Managed version control via GitHub, actively reviewing and ensuring team-wide adherence to best practices.
 
@@ -27,7 +27,7 @@ London | Aug 2021
 SIDE PROJECTS
 
 Real Estate AI Agent (Tumai) | Agentic Document Assistant
-Jan 2024 – Present
+Jan 2025 to now
 • Designed and developed an AI-powered assistant to help real estate professionals manage documents via a natural language chat interface.
 • The agent enables users to upload, delete, retrieve, and send documents by email, integrating backend actions with LLM-driven interaction.
 • Built with Python, OpenAI Agents SDK, PostgreSQL and React, the app leverages agentic workflows and embeddings for intelligent file handling.
@@ -36,12 +36,12 @@ Jan 2024 – Present
 EDUCATION
 
 University College London (UCL)
-MSci Neuroscience (Upper 2.1) | Sep 2018 - Jun 2022
+MSci Neuroscience (Upper 2.1) | Sep 2018 to Jun 2022
 • Thesis: "The use of optogenetics to understand motor behaviour in mice."
 • Key modules: Neural Computation and Molecular Biology for Neuroscientists.
 
 Imperial College London
-Mathematics for Machine Learning | Jun 2021 - Aug 2021
+Mathematics for Machine Learning | Jun 2021 to Aug 2021
 
 SKILLS
 • Machine Learning, Python, SQL, JavaScript, Go, React, Node.js

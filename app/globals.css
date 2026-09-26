@@ -1,27 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-body);
+  --font-sans: var(--app-sans);
+  --font-mono: var(--app-mono);
 }
 
 :root {
-  /* Warm editorial palette — "The Art of Arriving" */
-  --color-bg: #f0e9da; /* cream paper */
-  --color-surface: #f4eee0; /* card surface */
-  --color-surface-alt: #ebe3d2; /* hover / secondary surface */
-  --color-dark: #161310; /* warm near-black */
-  --color-text: #26211b; /* primary text on cream */
-  --color-on-dark: #efe6d4; /* text on dark */
-  --color-text-muted: #6f6657; /* muted warm gray */
-  --color-accent: #9a7a4c; /* bronze / gold */
-  --color-border: #26211b;
+  color-scheme: light;
 }
 
 body {
-  color: var(--color-text);
-  background: var(--color-bg);
-  font-family: var(--font-body), Georgia, "Times New Roman", serif;
+  margin: 0;
+  background: var(--void);
+  color: var(--on-void);
+  font-family: var(--app-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -30,26 +23,995 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-heading), Georgia, serif;
-  font-weight: 400;
+  font-family: var(--app-display), var(--app-sans), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.035em;
 }
 
-/* WOW canvas helpers */
-.no-native-cursor,
-.no-native-cursor * {
-  cursor: none;
+.app-root h1,
+.app-root h2,
+.app-root h3,
+.app-root h4,
+.app-root h5,
+.app-root h6,
+.app-root button,
+.app-root input,
+.app-root select,
+.app-root textarea {
+  font-family: var(--app-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Coherent top-left light: a long, soft directional shadow for the windows. */
-.window-shadow {
-  box-shadow:
-    14px 22px 44px -26px rgba(38, 33, 27, 0.55),
-    2px 4px 10px -6px rgba(38, 33, 27, 0.25);
+.app-root .mono {
+  font-family: var(--app-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.app-root :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.app-root .press:active {
+  transform: translateY(1px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .no-native-cursor,
-  .no-native-cursor * {
-    cursor: auto;
+  .cap {
+    transition: none;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Round 2: the page is an object, not a document.
+   Shared physics for all three devices. Deep void, real depth, per-object
+   underglow, press feedback. No WebGL: bevel + two tinted glows + transform.
+   --------------------------------------------------------------------------- */
+
+.app-root {
+  position: relative;
+  min-height: 100dvh;
+  overflow-x: clip;
+  background: var(--void);
+  color: var(--on-void);
+  font-family: var(--app-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A single soft pool of light, so objects sit IN something. */
+.app-root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 80% at 50% 38%,
+    rgba(255, 255, 255, 0.055),
+    transparent 62%
+  );
+}
+
+.app-root h1,
+.app-root h2,
+.app-root h3,
+.app-root button {
+  font-family: var(--app-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.app-root .mono {
+  font-family: var(--app-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- The cap: the one physical primitive everything is built from ---- */
+.cap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, var(--cap-hi) 0%, var(--cap) 46%, var(--cap-lo) 100%);
+  color: var(--cap-ink);
+  /* two tinted glows are the backlight; the dark drop is the cap's own weight */
+  box-shadow:
+    0 0 8px 3px var(--g1),
+    0 0 26px 10px var(--g2),
+    0 10px 22px -8px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.18);
+  transform: rotate(var(--tilt, 0deg)) translateZ(0);
+  transition:
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.cap:hover,
+.cap:focus-visible {
+  transform: rotate(var(--tilt, 0deg)) translateY(-3px) scale(1.045);
+  box-shadow:
+    0 0 10px 3px var(--g1),
+    0 0 30px 12px var(--g2),
+    0 18px 30px -10px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.18);
+}
+
+/* Travel: a key that does not bottom out is not a key. */
+.cap:active,
+.cap[aria-expanded="true"] {
+  transform: rotate(var(--tilt, 0deg)) translateY(2px) scale(0.985);
+  box-shadow:
+    0 0 14px 4px var(--g1),
+    0 0 34px 14px var(--g2),
+    0 4px 10px -6px rgba(0, 0, 0, 0.95),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* The entrance is CSS, not Motion, on purpose: Motion writes an inline
+   transform, and an inline transform beats the stylesheet, so the tilt and the
+   whole hover/press physics would be dead the moment the animation settled.
+   Whoever owns the resting transform has to own the entrance too. */
+@media (prefers-reduced-motion: no-preference) {
+  .cap-in {
+    animation: cap-in 620ms cubic-bezier(0.22, 1.4, 0.36, 1) both;
+    animation-delay: var(--in, 0ms);
+  }
+}
+
+@keyframes cap-in {
+  from {
+    opacity: 0;
+    transform: rotate(var(--tilt, 0deg)) translateY(26px) scale(0.42);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--tilt, 0deg));
+  }
+}
+
+.app-root :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ---- The label plate that hangs off a cap, like a keycap legend ---- */
+.plate {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  translate: -50% 130%;
+  width: max-content;
+  max-width: 84px;
+  text-align: center;
+  padding: 3px 8px;
+  border: 1px solid var(--plate-line);
+  border-radius: 5px;
+  background: var(--plate);
+  color: #fff;
+  font-size: 11px;
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+/* ---- The screen the content lands on ---- */
+.screen {
+  border: 1px solid var(--screen-line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #14151b 0%, var(--screen) 100%);
+  box-shadow:
+    0 30px 70px -30px rgba(0, 0, 0, 1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cap {
+    transition: none;
+  }
+  .cap:hover,
+  .cap:focus-visible {
+    transform: rotate(var(--tilt, 0deg));
+  }
+}
+
+/* ---- Rack hardware: brushed faceplates, engraved text, status lamps ---- */
+.faceplate {
+  position: relative;
+  border: 1px solid #23242a;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, #1b1c22 0%, #141519 52%, #101116 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 14px 30px -18px rgba(0, 0, 0, 1);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faceplate:hover,
+.faceplate:focus-within {
+  border-color: #33353d;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 0 26px -2px var(--g2),
+    0 18px 34px -18px rgba(0, 0, 0, 1);
+}
+
+.engraved {
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.07),
+    0 -1px 0 rgba(0, 0, 0, 0.8);
+}
+
+.lamp {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--g1);
+  box-shadow: 0 0 7px 2px var(--g1), 0 0 16px 5px var(--g2);
+}
+
+/* Screw heads: two per plate, the detail that sells a rack unit. */
+.screw {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 34% 30%, #4b4d55, #202127 70%);
+  box-shadow: inset 0 0 0 1px #0c0d10, 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* A live trace. It is decoration with a job: it says "this one is running". */
+@media (prefers-reduced-motion: no-preference) {
+  .trace path {
+    stroke-dasharray: 220;
+    animation: trace-run 3.2s linear infinite;
+  }
+}
+
+@keyframes trace-run {
+  from {
+    stroke-dashoffset: 220;
+  }
+  to {
+    stroke-dashoffset: -220;
+  }
+}
+
+/* ---- Console: the whole viewport is the machine's front panel ---- */
+.bezel {
+  border: 1px solid #202128;
+  border-radius: 26px;
+  background: linear-gradient(180deg, #17181e 0%, #101115 60%, #0b0c0f 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.8),
+    0 40px 90px -40px rgba(0, 0, 0, 1);
+}
+
+.vent {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #1e1f26 0 2px,
+    transparent 2px 6px
+  );
+}
+
+/* ---- The greeting caret ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .caret {
+    animation: caret-blink 1.05s steps(1, end) infinite;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---- The face is the main button, so it wears the cap bevel ---- */
+.face-cap {
+  --g1: rgba(255, 255, 255, 0.16);
+  --g2: rgba(190, 200, 255, 0.1);
+  /* .cap sets a 12px radius and wins on source order, so the circle has to be
+     restated here rather than relying on a rounded-full utility. */
+  border-radius: 999px;
+  padding: 0;
+  background: #efe9dc; /* the plate the memoji was exported on, owned on purpose */
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- The ring: five projects orbiting her, firing.
+   This is the part that is not the reference. It is the neuroscience to
+   agents throughline rendered as light, and it belongs to the object rather
+   than sitting behind the page. ---- */
+.node {
+  opacity: 0.5; /* the resting value, and what reduced motion sees */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .node {
+    animation: fire 3.6s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+}
+
+/* Opacity only. A transform on the dots promotes them, and Chrome then
+   promotes the ring that contains them, whose layer edge painted a visible
+   1px seam across the page. A neuron firing is a brightness change anyway. */
+@keyframes fire {
+  0%,
+  72%,
+  100% {
+    opacity: 0.26;
+  }
+  80% {
+    opacity: 1;
+  }
+}
+
+/* When a key is held open the ring settles: the device is busy with one thing. */
+.app-root[data-open="true"] .node {
+  animation-play-state: paused;
+  opacity: 0.16;
+}
+
+/* ===========================================================================
+   Art direction pass. The first version was a tidy wireframe with lighting:
+   everything centred, everything the same size, no type voice, no texture.
+   The structure stays. What follows is the craft.
+   =========================================================================== */
+
+.display {
+  font-family: var(--app-display), var(--app-sans), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.042em;
+}
+
+/* ---- Stage light. One warm key from above, one cool rim below, and an
+   elliptical pool on the floor so the object is standing on something. ---- */
+.app-root::before {
+  background:
+    radial-gradient(52% 36% at 50% 20%, rgba(255, 196, 128, 0.13), transparent 70%),
+    radial-gradient(70% 44% at 50% 96%, rgba(120, 150, 255, 0.07), transparent 72%),
+    radial-gradient(38% 20% at 50% 62%, rgba(255, 255, 255, 0.05), transparent 70%);
+}
+
+/* ---- Grain. The difference between a dark screen and a dark material. ---- */
+.app-root::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.042;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- The caps, rebuilt. Warmer plastic, a sharper bevel, a light sweep
+   across the top third, and a backlight that actually carries. ---- */
+.cap {
+  border-color: rgba(255, 255, 255, 0.9);
+  background:
+    linear-gradient(197deg, #fbfaf8 0%, #e6e3dd 42%, #cfcbc3 78%, #b9b5ac 100%);
+  box-shadow:
+    0 0 10px 2px var(--g1),
+    0 0 34px 12px var(--g2),
+    0 14px 26px -10px rgba(0, 0, 0, 0.95),
+    0 2px 0 0 rgba(0, 0, 0, 0.55),
+    inset 0 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -3px 4px rgba(90, 80, 68, 0.28);
+}
+
+/* the specular sweep: a real cap catches light on its upper shoulder */
+.cap::before {
+  content: "";
+  position: absolute;
+  inset: 1px 1px auto 1px;
+  height: 42%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent);
+  pointer-events: none;
+}
+
+.cap:hover,
+.cap:focus-visible {
+  transform: rotate(var(--tilt, 0deg)) translateY(-4px) scale(1.055);
+  box-shadow:
+    0 0 14px 3px var(--g1),
+    0 0 52px 20px var(--g2),
+    0 24px 38px -12px rgba(0, 0, 0, 1),
+    0 2px 0 0 rgba(0, 0, 0, 0.55),
+    inset 0 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -3px 4px rgba(90, 80, 68, 0.28);
+}
+
+.cap:active,
+.cap[aria-expanded="true"] {
+  transform: rotate(var(--tilt, 0deg)) translateY(3px) scale(0.982);
+  box-shadow:
+    0 0 18px 5px var(--g1),
+    0 0 60px 24px var(--g2),
+    0 3px 7px -4px rgba(0, 0, 0, 0.95),
+    inset 0 3px 6px rgba(90, 80, 68, 0.42);
+}
+
+/* ---- The plate, as an engraved tag rather than a tooltip ---- */
+.plate {
+  padding: 4px 9px;
+  border-color: rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #17151300 0%, #000 100%), #0e0d0c;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 6px 14px -8px rgba(0, 0, 0, 1);
+  font-family: var(--app-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: #cfc8bf;
+}
+
+/* ---- Entrance: caps drop, overshoot their tilt, and settle ---- */
+@keyframes cap-in {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) translateY(-34px) scale(0.72);
+  }
+  62% {
+    opacity: 1;
+    transform: rotate(calc(var(--tilt, 0deg) * 1.85)) translateY(4px) scale(1.035);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(var(--tilt, 0deg));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cap-in {
+    animation-duration: 900ms;
+    animation-timing-function: cubic-bezier(0.22, 1.18, 0.36, 1);
+  }
+}
+
+/* ---- The backlight breathes. A powered device is never perfectly still. ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .cap-in {
+    --breath: 1;
+  }
+  .breathe {
+    animation: breathe 5.2s ease-in-out infinite;
+    animation-delay: var(--bd, 0s);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---- The face: warmer rim, and it sits in the pool of light ---- */
+.face-cap {
+  --g1: rgba(255, 214, 160, 0.2);
+  --g2: rgba(255, 150, 60, 0.12);
+  border-color: rgba(255, 255, 255, 0.55);
+  background: #f3ece0;
+  box-shadow:
+    0 0 26px 6px var(--g1),
+    0 0 90px 34px var(--g2),
+    0 26px 48px -18px rgba(0, 0, 0, 1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+}
+
+.face-cap::before {
+  display: none; /* the sweep belongs on flat caps, not on a sphere */
+}
+
+.face-cap:hover,
+.face-cap:focus-visible {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* ---- Ring ---- */
+.node {
+  opacity: 0.55;
+}
+
+@keyframes fire {
+  0%,
+  70%,
+  100% {
+    opacity: 0.3;
+  }
+  78% {
+    opacity: 1;
+  }
+}
+
+/* ---- One object: reaching for a key warms the light on her face.
+   Done with :has() so it costs no React state and no re-render. ---- */
+.stage:has(.k-work:hover) .face-cap,
+.stage:has(.k-work:focus-visible) .face-cap {
+  --g1: rgba(255, 168, 70, 0.34);
+  --g2: rgba(255, 110, 20, 0.2);
+}
+.stage:has(.k-about:hover) .face-cap,
+.stage:has(.k-about:focus-visible) .face-cap {
+  --g1: rgba(90, 235, 214, 0.32);
+  --g2: rgba(13, 148, 136, 0.2);
+}
+.stage:has(.k-contact:hover) .face-cap,
+.stage:has(.k-contact:focus-visible) .face-cap {
+  --g1: rgba(186, 164, 255, 0.32);
+  --g2: rgba(109, 40, 217, 0.2);
+}
+
+/* ---- Headings inside the panel get the display voice too ---- */
+.screen h2 {
+  font-family: var(--app-display), var(--app-sans), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+/* ---- The backlight breathes, the key does not.
+   Animating opacity on .cap itself dimmed the whole keycap, which read as a
+   dead key. The glow moves to its own pseudo element: an outer box-shadow
+   paints outside the border box, so it never covers the cap face. ---- */
+.cap {
+  box-shadow:
+    0 14px 26px -10px rgba(0, 0, 0, 0.95),
+    0 2px 0 0 rgba(0, 0, 0, 0.55),
+    inset 0 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -3px 4px rgba(90, 80, 68, 0.28);
+}
+
+.cap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    0 0 10px 2px var(--g1),
+    0 0 34px 12px var(--g2);
+  transition: box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cap:hover::after,
+.cap:focus-visible::after {
+  box-shadow:
+    0 0 15px 4px var(--g1),
+    0 0 54px 22px var(--g2);
+}
+
+.cap:active::after,
+.cap[aria-expanded="true"]::after {
+  box-shadow:
+    0 0 20px 6px var(--g1),
+    0 0 64px 26px var(--g2);
+}
+
+.cap:hover,
+.cap:focus-visible {
+  box-shadow:
+    0 24px 38px -12px rgba(0, 0, 0, 1),
+    0 2px 0 0 rgba(0, 0, 0, 0.55),
+    inset 0 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -3px 4px rgba(90, 80, 68, 0.28);
+}
+
+.cap:active,
+.cap[aria-expanded="true"] {
+  box-shadow:
+    0 3px 7px -4px rgba(0, 0, 0, 0.95),
+    inset 0 3px 6px rgba(90, 80, 68, 0.42);
+}
+
+/* breathe the glow only */
+@media (prefers-reduced-motion: no-preference) {
+  .breathe {
+    animation: none;
+  }
+  .breathe::after {
+    animation: breathe 5.2s ease-in-out infinite;
+    animation-delay: var(--bd, 0s);
+  }
+}
+
+/* The face carries its own light, so it keeps its shadow on the element. */
+.face-cap::after {
+  box-shadow:
+    0 0 26px 6px var(--g1),
+    0 0 90px 34px var(--g2);
+}
+
+.face-cap {
+  box-shadow:
+    0 26px 48px -18px rgba(0, 0, 0, 1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ===========================================================================
+   Layout corrections, all measured rather than eyeballed.
+   =========================================================================== */
+
+/* The stage scales with the viewport height. A fixed 340px ring plus fixed
+   gaps overflowed a 1280x720 laptop by 72px. */
+.app-root {
+  --stage: clamp(156px, 27vh, 248px);
+  --face: clamp(156px, 27vh, 248px);
+  --gap-1: clamp(26px, 4.4vh, 60px);
+  --gap-2: clamp(4px, 1.2vh, 20px);
+  /* the face casts a long shadow now, so the key row needs its own clearance */
+  /* the face now hangs a label plate below itself, so the key row has to
+     clear the plate, not the face */
+  --gap-keys: clamp(52px, 7.4vh, 86px);
+  --gap-3: clamp(30px, 5.6vh, 76px);
+}
+
+/* The plate is absolutely positioned, so it claims no layout height and every
+   label was sitting on top of the footer at all four widths. It now hangs a
+   measured 12px below the cap, and the row that owns the caps reserves the
+   space the plates need. */
+.plate {
+  translate: -50% calc(100% + 12px);
+}
+
+.key-row {
+  padding-bottom: 46px;
+}
+
+/* ---- Her face. The clip is 340x390 and the head spans x 46..320, y 24..346
+   across the full rotation, so a centred square cover crop cut the hair top
+   and bottom. contain keeps the whole head, the letterbox is invisible because
+   the cap face is the clip's own background colour, and the small translate
+   centres the measured head box rather than the frame. ---- */
+.face-cap {
+  background: #f3efe1;
+}
+
+.face-cap video {
+  object-fit: contain;
+  transform: translate(-3.8%, 2.6%) scale(0.93);
+}
+
+/* ===========================================================================
+   Two-beat entrance. The line lands on its own, then the object assembles
+   around it. Everything below the greeting waits for data-ready.
+   =========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .app-root[data-ready="false"] .cap-in,
+  .app-root[data-ready="false"] .face-in,
+  .app-root[data-ready="false"] .node,
+  .app-root[data-ready="false"] .ring-line,
+  .app-root[data-ready="false"] .backdrop-canvas {
+    opacity: 0;
+    animation: none;
+  }
+
+  .app-root[data-ready="true"] .cap-in {
+    animation: cap-in 900ms cubic-bezier(0.22, 1.18, 0.36, 1) both;
+    animation-delay: var(--in, 0ms);
+  }
+
+  .app-root[data-ready="true"] .face-in {
+    animation: face-in 820ms cubic-bezier(0.22, 1.1, 0.36, 1) both;
+  }
+
+  .app-root[data-ready="true"] .ring-line {
+    animation: ring-in 1100ms cubic-bezier(0.16, 1, 0.3, 1) both 260ms;
+  }
+
+  /* opacity only: the dots carry an inline centring transform */
+  .app-root[data-ready="true"] .node {
+    animation:
+      node-in 520ms ease-out both,
+      fire 3.6s ease-in-out infinite;
+    animation-delay: var(--d, 0s), calc(var(--d, 0s) + 520ms);
+  }
+
+  .app-root[data-ready="true"] .backdrop-canvas {
+    animation: fade-in 1600ms ease-out both 200ms;
+  }
+}
+
+@keyframes face-in {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ring-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes node-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.55;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* The backdrop is the room, never the subject: it is pushed back and kept
+   out of the middle so the face and the keys stay the brightest things. */
+.backdrop-canvas {
+  opacity: 0.34;
+  -webkit-mask-image: radial-gradient(
+    76% 58% at 50% 46%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.42) 52%,
+    #000 88%
+  );
+  mask-image: radial-gradient(
+    76% 58% at 50% 46%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.42) 52%,
+    #000 88%
+  );
+}
+
+
+/* ===========================================================================
+   PALETTES
+   Colour lives here, not scattered through the components, so the whole page
+   changes with one attribute. Five intents, same layout, same content.
+
+   One constant across all of them: the memoji was exported on a cream plate
+   that is baked into the video, so the face button stays #f3efe1 everywhere or
+   the letterbox shows. Her face is an ivory button in every palette.
+   =========================================================================== */
+
+:root {
+  --title: #b5451f;
+  --sig-ink: 74, 76, 70;
+  --screen: #fbfaf6;
+  --screen-2: #ffffff;
+  --screen-line: #dcd8ce;
+  --card: rgba(30, 28, 24, 0.04);
+  --face-plate: #f3efe1;
+  --cap-a: #fffefb;
+  --cap-b: #f4f1e9;
+  --cap-c: #e2ddd1;
+  --cap-d: #d2ccbd;
+  --cap-ink: #26251f;
+  --cap-edge: rgba(255, 255, 255, 0.95);
+  --cap-lip: rgba(120, 108, 88, 0.55);
+  --cap-inset: rgba(120, 108, 88, 0.22);
+  --plate-bg: #1c1b18;
+  --plate-ink: #e7e3d9;
+  --plate-edge: rgba(0, 0, 0, 0.3);
+  --key-warm: rgba(190, 150, 95, 0.1);
+  --key-rim: rgba(90, 110, 150, 0.05);
+  --key-fill: rgba(255, 255, 255, 0.45);
+  --grain: 0.05;
+  --sig-1: 150, 90, 40;
+  --sig-2: 13, 106, 95;
+  --sig-3: 96, 78, 128;
+  --sig-4: 158, 66, 72;
+  --sig-5: 62, 106, 138;
+  --k-work-1: rgba(181, 69, 31, 0.62);
+  --k-work-2: rgba(181, 69, 31, 0.16);
+  --k-about-1: rgba(120, 108, 88, 0.3);
+  --k-about-2: rgba(120, 108, 88, 0.09);
+  --k-contact-1: rgba(120, 108, 88, 0.3);
+  --k-contact-2: rgba(120, 108, 88, 0.09);
+  --k-util-1: rgba(181, 69, 31, 0.55);
+  --k-util-2: rgba(181, 69, 31, 0.13);
+  --void: #e9e6de;
+  --void-2: #dfdbd1;
+  --accent: #b5451f;
+  --on-void: #191a18;
+  --on-void-2: #5e605b;
+}
+
+.app-root {
+  position: relative;
+  min-height: 100dvh;
+  overflow-x: clip;
+  background: var(--void);
+  color: var(--on-void);
+  font-family: var(--app-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+
+
+/* ---- Everything that paints now reads from the tokens above ---- */
+.app-root::before {
+  background:
+    radial-gradient(52% 36% at 50% 20%, var(--key-warm), transparent 70%),
+    radial-gradient(70% 44% at 50% 96%, var(--key-rim), transparent 72%),
+    radial-gradient(38% 20% at 50% 62%, var(--key-fill), transparent 70%);
+}
+
+.app-root::after {
+  opacity: var(--grain);
+}
+
+.cap {
+  border-color: var(--cap-edge);
+  color: var(--cap-ink);
+  background: linear-gradient(
+    197deg,
+    var(--cap-a) 0%,
+    var(--cap-b) 42%,
+    var(--cap-c) 78%,
+    var(--cap-d) 100%
+  );
+  box-shadow:
+    0 14px 26px -10px rgba(0, 0, 0, 0.95),
+    0 2px 0 0 var(--cap-lip),
+    inset 0 1.5px 0 var(--cap-edge),
+    inset 0 -3px 4px var(--cap-inset);
+}
+
+.plate {
+  border-color: var(--plate-edge);
+  background: var(--plate-bg);
+  color: var(--plate-ink);
+}
+
+.face-cap {
+  background: var(--face-plate);
+  --g1: var(--k-util-1);
+  --g2: var(--k-util-2);
+}
+
+.k-work { --g1: var(--k-work-1); --g2: var(--k-work-2); }
+.k-about { --g1: var(--k-about-1); --g2: var(--k-about-2); }
+.k-contact { --g1: var(--k-contact-1); --g2: var(--k-contact-2); }
+.k-util { --g1: var(--k-util-1); --g2: var(--k-util-2); }
+
+/* the face picks up the colour of whichever key you reach for */
+.stage:has(.k-work:hover) .face-cap,
+.stage:has(.k-work:focus-visible) .face-cap { --g1: var(--k-work-1); --g2: var(--k-work-2); }
+.stage:has(.k-about:hover) .face-cap,
+.stage:has(.k-about:focus-visible) .face-cap { --g1: var(--k-about-1); --g2: var(--k-about-2); }
+.stage:has(.k-contact:hover) .face-cap,
+.stage:has(.k-contact:focus-visible) .face-cap { --g1: var(--k-contact-1); --g2: var(--k-contact-2); }
+
+
+
+/* The panel surface follows the palette, and its buttons are made of the same
+   material as the keycaps: on paper that flips them dark automatically. */
+.screen {
+  border-color: var(--screen-line);
+  background: linear-gradient(180deg, var(--screen-2) 0%, var(--screen) 100%);
+}
+
+.cta {
+  background: linear-gradient(180deg, var(--cap-a), var(--cap-c));
+  color: var(--cap-ink);
+  border: 1px solid var(--cap-edge);
+}
+
+.cta-ghost {
+  border: 1px solid var(--screen-line);
+  color: var(--on-void);
+}
+
+.cta-ghost:hover {
+  border-color: var(--on-void);
+}
+
+.card-surface {
+  background: var(--card);
+}
+
+/* Emphasis inside a panel. It was text-white, which on a light card is white
+   on near-white. It follows the palette now. */
+.strong {
+  color: var(--on-void);
+  font-weight: 500;
+}
+
+
+
+/* A cap in a lit room: a long soft cast shadow, and the colour on its side
+   wall rather than bleeding out of it. */
+.app-root .cap {
+  box-shadow:
+    0 2px 0 0 var(--cap-lip),
+    0 10px 18px -8px rgba(80, 70, 55, 0.4),
+    0 26px 40px -18px rgba(80, 70, 55, 0.35),
+    inset 0 1.5px 0 var(--cap-edge),
+    inset 0 -3px 4px var(--cap-inset);
+}
+
+.app-root .cap::after {
+  box-shadow:
+    inset 0 -3px 0 0 var(--g1),
+    0 0 14px 1px var(--g2);
+}
+
+.app-root .cap:hover::after,
+.app-root .cap:focus-visible::after {
+  box-shadow:
+    inset 0 -4px 0 0 var(--g1),
+    0 0 22px 3px var(--g2);
+}
+
+.app-root .cap:hover,
+.app-root .cap:focus-visible {
+  box-shadow:
+    0 2px 0 0 var(--cap-lip),
+    0 16px 26px -8px rgba(80, 70, 55, 0.42),
+    0 38px 56px -20px rgba(80, 70, 55, 0.36),
+    inset 0 1.5px 0 var(--cap-edge),
+    inset 0 -3px 4px var(--cap-inset);
+}
+
+.app-root .face-cap {
+  box-shadow:
+    0 12px 22px -10px rgba(80, 70, 55, 0.45),
+    0 34px 54px -22px rgba(80, 70, 55, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+}
+
+
+
+
+
+
+
+
+
+/* Panel chrome is not a way in, so it never wears the accent. */
+.screen .cap {
+  --g1: rgba(120, 108, 88, 0.26);
+  --g2: rgba(120, 108, 88, 0.08);
+}
+
+/* Only the primary key breathes. A secondary key that pulses is asking for
+   attention it should not have. */
+.k-about.breathe::after,
+.k-contact.breathe::after {
+  animation: none;
+}
+
+/* The orbit is context, not content: quieter now that the page has a first
+   thing to look at. */
+.node {
+  opacity: 0.34;
 }

@@ -48,3 +48,6 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 _shot.mjs
+
+# design iteration captures, not part of the app
+lab-shots/

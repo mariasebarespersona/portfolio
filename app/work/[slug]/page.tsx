@@ -39,7 +39,7 @@ export default async function ProjectPage({
   if (!p) notFound();
 
   return (
-    <div className="min-h-[100dvh] w-full bg-[#f0e9da] text-[#26211b]">
+    <div className="min-h-[100dvh] w-full bg-[color:var(--void)] text-[color:var(--on-void)]">
       {/* Background noise */}
       <div
         className="pointer-events-none fixed inset-0 opacity-[0.025]"
@@ -52,25 +52,25 @@ export default async function ProjectPage({
         {/* Back */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[#6f6657] transition-colors hover:text-[#9a7a4c]"
+          className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--on-void-2)] transition-colors hover:text-[color:var(--accent)]"
         >
           <ArrowLeft size={16} /> Back to portfolio
         </Link>
 
         {/* Header */}
-        <header className="mt-8 border-b border-[#26211b]/12 pb-8">
-          <div className="flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-[0.16em] text-[#9a7a4c]">
+        <header className="mt-8 border-b border-[color:var(--on-void)]/12 pb-8">
+          <div className="flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--accent)]">
             {p.badge && (
-              <span className="rounded-full bg-[#161310] px-2.5 py-1 text-[#efe6d4]">{p.badge}</span>
+              <span className="rounded-full bg-[color:var(--on-void)] px-2.5 py-1 text-[color:var(--void)]">{p.badge}</span>
             )}
             <span>{p.role}</span>
-            <span className="text-[#9a7a4c]/40">·</span>
+            <span className="text-[color:var(--accent)]/40">·</span>
             <span>{p.year}</span>
           </div>
-          <h1 className="mt-4 text-4xl font-normal tracking-tight text-[#26211b] md:text-6xl">
+          <h1 className="mt-4 text-4xl font-normal tracking-tight text-[color:var(--on-void)] md:text-6xl">
             {p.name}
           </h1>
-          <p className="mt-4 max-w-[640px] text-lg leading-relaxed text-[#6f6657]">{p.summary}</p>
+          <p className="mt-4 max-w-[640px] text-lg leading-relaxed text-[color:var(--on-void-2)]">{p.summary}</p>
 
           <div className="mt-6 flex flex-wrap gap-2">
             {p.externalLink && (
@@ -78,7 +78,7 @@ export default async function ProjectPage({
                 href={p.externalLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full border border-[#26211b]/50 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[#26211b] transition-colors hover:bg-[#26211b] hover:text-[#efe6d4]"
+                className="flex items-center gap-1.5 rounded-full border border-[color:var(--on-void)]/50 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--on-void)] transition-colors hover:bg-[color:var(--on-void)] hover:text-[color:var(--void)]"
               >
                 <ArrowUpRight size={13} /> {p.externalLabel ?? "Visit"}
               </a>
@@ -88,7 +88,7 @@ export default async function ProjectPage({
                 href={p.repo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full border border-[#26211b]/30 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[#26211b] transition-colors hover:bg-[#26211b]/5"
+                className="flex items-center gap-1.5 rounded-full border border-[color:var(--on-void)]/30 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--on-void)] transition-colors hover:bg-[color:var(--on-void)]/5"
               >
                 <Github size={13} /> Code
               </a>
@@ -97,28 +97,25 @@ export default async function ProjectPage({
         </header>
 
         {/* Body */}
-        <div className="mt-8 max-w-[680px] space-y-5 text-[15px] leading-relaxed text-[#3f3a31]">
+        <div className="mt-8 max-w-[680px] space-y-5 text-[15px] leading-relaxed text-[color:var(--on-void-2)]">
           {p.body.map((para, i) => (
             <p key={i}>{para}</p>
           ))}
         </div>
 
-        {/* Gallery — window-framed images */}
+        {/* Gallery */}
         <div className="mt-10 space-y-6">
           {p.gallery.map((src, i) => (
             <figure
               key={src + i}
-              className="overflow-hidden rounded-xl border border-[#26211b]/12 bg-[#f4eee0] shadow-[0_18px_40px_-22px_rgba(38,33,27,0.45)]"
+              className="overflow-hidden rounded-xl border border-[color:var(--on-void)]/12 bg-[color:var(--screen)] shadow-[0_18px_40px_-22px_rgba(38,33,27,0.45)]"
             >
-              <div className="flex items-center gap-1.5 border-b border-[#26211b]/10 bg-[#ebe3d2]/70 px-3 py-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#c4694f]/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#caa45a]/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#7f9a6b]/80" />
-                <span className="ml-1 truncate text-[10px] uppercase tracking-[0.16em] text-[#6f6657]">
+              <div className="flex items-center gap-1.5 border-b border-[color:var(--on-void)]/10 bg-[color:var(--card)]/70 px-3 py-2">
+                <span className="ml-1 truncate text-[10px] uppercase tracking-[0.16em] text-[color:var(--on-void-2)]">
                   {p.windowLabel}
                 </span>
               </div>
-              <div className="relative aspect-[16/10] w-full bg-[#ebe3d2]">
+              <div className="relative aspect-[16/10] w-full bg-[color:var(--card)]">
                 <Image
                   src={src}
                   alt={`${p.name} screenshot ${i + 1}`}
@@ -132,16 +129,16 @@ export default async function ProjectPage({
         </div>
 
         {/* Meta — tags & stack */}
-        <div className="mt-10 grid gap-8 border-t border-[#26211b]/12 pt-8 sm:grid-cols-2">
+        <div className="mt-10 grid gap-8 border-t border-[color:var(--on-void)]/12 pt-8 sm:grid-cols-2">
           <div>
-            <h2 className="mb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[#9a7a4c]">
+            <h2 className="mb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[color:var(--accent)]">
               Focus
             </h2>
             <div className="flex flex-wrap gap-2">
               {p.tags.map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-[#9a7a4c]/40 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] text-[#9a7a4c]"
+                  className="rounded-full border border-[color:var(--accent)]/40 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] text-[color:var(--accent)]"
                 >
                   {t}
                 </span>
@@ -149,14 +146,14 @@ export default async function ProjectPage({
             </div>
           </div>
           <div>
-            <h2 className="mb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[#9a7a4c]">
+            <h2 className="mb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[color:var(--accent)]">
               Stack
             </h2>
             <div className="flex flex-wrap gap-2">
               {p.stack.map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-[#26211b]/20 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] text-[#26211b]"
+                  className="rounded-full border border-[color:var(--on-void)]/20 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] text-[color:var(--on-void)]"
                 >
                   {t}
                 </span>
@@ -166,10 +163,10 @@ export default async function ProjectPage({
         </div>
 
         {/* Footer nav */}
-        <div className="mt-12 border-t border-[#26211b]/12 pt-8">
+        <div className="mt-12 border-t border-[color:var(--on-void)]/12 pt-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[#6f6657] transition-colors hover:text-[#9a7a4c]"
+            className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--on-void-2)] transition-colors hover:text-[color:var(--accent)]"
           >
             <ArrowLeft size={16} /> Back to portfolio
           </Link>
