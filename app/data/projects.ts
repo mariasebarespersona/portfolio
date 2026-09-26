@@ -151,7 +151,7 @@ export const projects: Project[] = [
     ],
     tags: ["Product", "Matching", "Data"],
     stack: ["JavaScript", "Vercel Functions", "Node"],
-    externalLink: "https://angel-match.vercel.app/",
+    externalLink: "https://angel-match.vercel.app/?start=1",
     externalLabel: "Open the app",
     cover: "/work/angel-match.jpg",
     gallery: ["/work/angel-match.jpg"],
