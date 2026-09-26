@@ -3,7 +3,10 @@ import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 
 /* One place decides the canonical home. Everything else reads it. */
-export const SITE = "https://mariasebares.com";
+/* Vercel serves www as the primary and 308s the apex to it, so every canonical,
+   the sitemap and the OG url say www too. If the primary is ever flipped to the
+   bare domain in Vercel, this line flips with it. */
+export const SITE = "https://www.mariasebares.com";
 
 const sans = Geist({
   subsets: ["latin"],
