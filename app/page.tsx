@@ -91,6 +91,20 @@ export default function Hola() {
         ))}
       </div>
 
+      {/* The page is an object: almost nothing here is text, which leaves a
+          screen reader with four button labels and a search engine with a
+          title. This is the page described once, in plain words, for both. */}
+      <p className="sr-only">
+        María Sebares is an AI Engineer and founder based between San Francisco
+        and Madrid. She runs Tumai, a B2B startup whose software a modular home
+        dealer in Texas runs their business on, with paying customers in
+        production, and she is raising an angel round. She also builds NeuroPop,
+        three tools that turn brain research into something a person can use,
+        and is open to collaborations on it. Previously an AI Engineer at IBM for
+        three years, building agentic systems for a bank. MSci Neuroscience,
+        University College London.
+      </p>
+
       {/* the greeting */}
       <div className="relative z-10 text-center" style={{ marginTop: "var(--gap-1)" }}>
         <Typed onFirstLine={reveal} />
